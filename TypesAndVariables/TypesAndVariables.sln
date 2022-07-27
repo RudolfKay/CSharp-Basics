@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassesAndTeachers", "Class
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberSum", "NumberSum\NumberSum.csproj", "{4E1E6FF7-E873-42BE-8FF2-A91730220177}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindUpperCase", "FindUpperCase\FindUpperCase.csproj", "{093564CC-A187-469B-9FF0-CB150F6FC5F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{4E1E6FF7-E873-42BE-8FF2-A91730220177}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E1E6FF7-E873-42BE-8FF2-A91730220177}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E1E6FF7-E873-42BE-8FF2-A91730220177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{093564CC-A187-469B-9FF0-CB150F6FC5F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{093564CC-A187-469B-9FF0-CB150F6FC5F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{093564CC-A187-469B-9FF0-CB150F6FC5F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{093564CC-A187-469B-9FF0-CB150F6FC5F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
