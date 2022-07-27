@@ -25,6 +25,7 @@ namespace Casting
 
             int sum = int.Parse(a) + b + c + (int)(d + e);
             Console.WriteLine(sum);
+            Console.ReadKey();
         }
 
         static void Second()
@@ -37,6 +38,7 @@ namespace Casting
 
             float sum = float.Parse(a) + b + c + (float)(d) + e;
             Console.WriteLine(sum);
+            Console.ReadKey();
         }
     }
 }
