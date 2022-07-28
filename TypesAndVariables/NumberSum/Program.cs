@@ -15,7 +15,7 @@ namespace NumberSum
 
             string userInput = Console.ReadLine();
             int sum = 0;
-            int intCheck = 0;
+            int intCheck;
 
             while (string.IsNullOrEmpty(userInput) || !int.TryParse(userInput, out intCheck))
             {
