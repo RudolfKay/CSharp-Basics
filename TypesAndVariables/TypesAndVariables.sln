@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindUpperCase", "FindUpperC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinutesToYearsAndDays", "MinutesToYearsAndDays\MinutesToYearsAndDays.csproj", "{48EFF39A-4DB4-417E-B45E-839387073BD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisplaySpeed", "DisplaySpeed\DisplaySpeed.csproj", "{2E11F779-C54E-45C3-952F-BF52D5D0AC32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{48EFF39A-4DB4-417E-B45E-839387073BD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48EFF39A-4DB4-417E-B45E-839387073BD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48EFF39A-4DB4-417E-B45E-839387073BD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E11F779-C54E-45C3-952F-BF52D5D0AC32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E11F779-C54E-45C3-952F-BF52D5D0AC32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E11F779-C54E-45C3-952F-BF52D5D0AC32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E11F779-C54E-45C3-952F-BF52D5D0AC32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
