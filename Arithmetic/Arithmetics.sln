@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckOddEven", "CheckOddEve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product1ToN", "Product1ToN\Product1ToN.csproj", "{CC5C54B9-6B80-4D6C-BE02-0A196F8F01CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessRandomNum", "GuessRandomNum\GuessRandomNum.csproj", "{65B7591E-ECB2-4778-864D-8DF13B911AC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{CC5C54B9-6B80-4D6C-BE02-0A196F8F01CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC5C54B9-6B80-4D6C-BE02-0A196F8F01CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC5C54B9-6B80-4D6C-BE02-0A196F8F01CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65B7591E-ECB2-4778-864D-8DF13B911AC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65B7591E-ECB2-4778-864D-8DF13B911AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65B7591E-ECB2-4778-864D-8DF13B911AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65B7591E-ECB2-4778-864D-8DF13B911AC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
