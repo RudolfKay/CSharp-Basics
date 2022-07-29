@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product1ToN", "Product1ToN\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessRandomNum", "GuessRandomNum\GuessRandomNum.csproj", "{65B7591E-ECB2-4778-864D-8DF13B911AC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozaLozaWoza", "CozaLozaWoza\CozaLozaWoza.csproj", "{9FB38A96-736C-4010-8049-BC121E617BF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{65B7591E-ECB2-4778-864D-8DF13B911AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65B7591E-ECB2-4778-864D-8DF13B911AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65B7591E-ECB2-4778-864D-8DF13B911AC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB38A96-736C-4010-8049-BC121E617BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB38A96-736C-4010-8049-BC121E617BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB38A96-736C-4010-8049-BC121E617BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB38A96-736C-4010-8049-BC121E617BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
