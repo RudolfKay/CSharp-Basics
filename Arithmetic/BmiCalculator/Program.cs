@@ -19,8 +19,6 @@ namespace BmiCalculator
             double weightPounds = 2.20462262 * weightKilos;
             double heightInches = 0.3937008 * heightCm;
 
-            Console.WriteLine(weightPounds);
-            Console.WriteLine(heightInches);
             double bmIndex = weightPounds * 703 / Math.Pow(heightInches, 2);
 
             if (bmIndex < 18.5)
