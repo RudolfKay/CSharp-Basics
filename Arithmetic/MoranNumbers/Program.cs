@@ -57,14 +57,7 @@ namespace MoranNumbers
                 }
             }
 
-            if (primeCheck == 2)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return primeCheck == 2;
         }
     }
 }

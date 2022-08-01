@@ -38,12 +38,7 @@ namespace FindFifteen
         static bool FindFifteen(int firstInt, int secondInt)
         {
             Console.WriteLine("Checking for 15...");
-            if (firstInt == 15 || secondInt == 15 || Math.Abs(firstInt - secondInt) == 15 || firstInt + secondInt == 15)
-            {
-                return true;
-            }
-
-            return false;
+            return (firstInt == 15 || secondInt == 15 || Math.Abs(firstInt - secondInt) == 15 || firstInt + secondInt == 15);
         }
     }
 }
