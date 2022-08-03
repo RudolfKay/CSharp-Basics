@@ -3,24 +3,32 @@
 namespace Exercise2
 {
     class Program
-    {       
-        // TODO: Write a C# program to sum values of an array.
-        // Array values are starting from min (including) till max (including) number. 
+    {
         private static void Main(string[] args)
         {
+            int intCheck = 0;
             var sum = 0;
 
             Console.WriteLine("Please enter a min number");
-            int minNumber = int.Parse(Console.ReadLine());
+            var minInput = Console.ReadLine();
             Console.WriteLine("Please enter a max number");
-            int maxNumber = int.Parse(Console.ReadLine());
+            var maxInput = Console.ReadLine();
 
-            /*
-            fixme
-            for (........) {
-            ........
+            while ( !int.TryParse(minInput, out intCheck) || !int.TryParse(maxInput, out intCheck) || int.Parse(maxInput) < int.Parse(minInput))
+            {
+                Console.WriteLine("One or more inputs not valid! Max has to be more than Min. Try again!\nPlease enter a min number");
+                minInput = Console.ReadLine();
+                Console.WriteLine("Please enter a max number");
+                maxInput = Console.ReadLine();
             }
-            */
+
+            int maxInt = int.Parse(maxInput);
+            int minInt = int.Parse(minInput);
+
+            for (int i= minInt; i <= maxInt; i++)
+            {
+                sum += i;
+            }
 
             Console.WriteLine("The sum is " + sum);
             Console.ReadKey();
