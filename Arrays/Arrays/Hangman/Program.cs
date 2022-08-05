@@ -13,7 +13,7 @@ namespace Hangman
         private static string _misses;
         private static char _currGuess;
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             InitGame();
             DisplayHangman();
@@ -29,6 +29,7 @@ namespace Hangman
             _randomWord = wordList[random.Next(wordList.Length)];
             _wordToGuess = new string[_randomWord.Length];
             _misses = "";
+            _currGuess = ' ';
 
             for (int i = 0; i < _wordToGuess.Length; i++)
             {
@@ -63,7 +64,7 @@ namespace Hangman
                     userChoice = Console.ReadLine();
                 }
 
-                _currGuess = Char.Parse(userChoice);
+                _currGuess = Char.Parse(userChoice.ToLower());
                 Console.Clear();
 
                 if (_randomWord.Contains(_currGuess))
@@ -94,6 +95,24 @@ namespace Hangman
             {
                 Console.WriteLine("You've run out of guesses.\nFeel free to restart!");
                 Console.ReadKey();
+            }
+
+            Console.WriteLine($"Play AGAIN or QUIT?\nType out your choice: ");
+            var quitOrAgain = Console.ReadLine();
+
+            switch (quitOrAgain)
+            {
+                case "again":
+                    InitGame();
+                    DisplayHangman();
+                    PlayHangman();
+                    break;
+                case "quit":
+                    Console.WriteLine("Thanks for playing!");
+                    Console.ReadKey();
+                    break;
+                default:
+                    break;
             }
         }
 
