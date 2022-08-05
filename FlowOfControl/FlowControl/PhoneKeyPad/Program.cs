@@ -21,11 +21,11 @@ namespace PhoneKeyPad
             string[] keyPad = { "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ" };
             char[] keyPadNum = { '2', '3', '4', '5', '6', '7', '8', '9'};
 
-            for (int i=0; i < input.Length; i++)
+            for (int i = 0; i < input.Length; i++)
             {
                 char thisChar = input[i];
 
-                for (int buttonIndex=0; buttonIndex < keyPad.Length; buttonIndex++)
+                for (int buttonIndex = 0; buttonIndex < keyPad.Length; buttonIndex++)
                 {
                     if (keyPad[buttonIndex].Contains(thisChar))
                     {

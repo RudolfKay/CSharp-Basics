@@ -24,11 +24,8 @@ namespace GetTheCentury
         public static string Century(int year)
         {
             if (year > 2000) return $"{(year / 100 + 1).ToString()}st Century";
-
             else if (year % 10 > 0) return $"{(year / 100 + 1).ToString()}th Century";
-            
             else if (year % 10 == 0) return $"{(year / 100).ToString()}th Century";
-
             else return "404: Century not found.";
         }
     }
