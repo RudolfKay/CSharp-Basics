@@ -4,64 +4,63 @@ namespace TenBillion
 {
     class Program
     {
-        //TODO Write a C# program that reads an positive integer and count the number of digits the number (less than ten billion) has.
         static void Main(string[] args)
         {
             Console.WriteLine("Input an integer number less than ten billion: ");
-
             var input = Console.ReadLine();
+            long intCheck = 0;
 
-            /*
-            todo - check if number
-            if (?) 
+            if (long.TryParse(input, out intCheck))
             {
-                //todo - check if n is less than zero
-                if (?) 
+                long numericInput = long.Parse(input);
+
+                if (numericInput < 0) 
                 {
-                    n *= -1;
+                    numericInput *= -1;
+                    input = numericInput.ToString();
                 }
 
-                fixme
-                if (?) 
+                if (numericInput >= 1e10) 
                 {
                     Console.WriteLine("Number is greater or equals 10,000,000,000!");
                 } 
                 else 
                 {
                     int digits = 1;
-                    if (?) 
+
+                    if (input.Length > 1) 
                     {
                         digits = 2;
                     } 
-                    else if (?) 
+                    if (input.Length > 2) 
                     {
                         digits = 3;
                     } 
-                    else if (?) 
+                    if (input.Length > 3) 
                     {
                         digits = 4;
                     } 
-                    else if (?) 
+                    if (input.Length > 4) 
                     {
                         digits = 5;
                     } 
-                    else if (?) 
+                    if (input.Length > 5) 
                     {
                         digits = 6;
                     } 
-                    else if (?) 
+                    if (input.Length > 6) 
                     {
                         digits = 7;
                     } 
-                    else if (?) 
+                    if (input.Length > 7) 
                     {
                         digits = 8;
                     } 
-                    else if (?) 
+                    if (input.Length > 8) 
                     {
                         digits = 9;
                     } 
-                    else if (?) 
+                    else if (input.Length > 9) 
                     {
                         digits = 10;
                     }
@@ -73,7 +72,8 @@ namespace TenBillion
             {
                 Console.WriteLine("The number is not a long");
             }
-            */
+            
+            Console.ReadKey();
         }
     }
 }
