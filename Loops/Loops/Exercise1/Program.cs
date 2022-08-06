@@ -6,12 +6,16 @@ namespace Exercise1
     {
         static void Main(string[] args)
         {
-            int i;
+            int N = 10;
+            string answer = "";
 
-            Console.WriteLine("The first 10 natural numbers are: ");
+            for (int i = 1; i <= N; i++)
+            {
+                answer += $"{i} ";
+            }
 
-            //todo - write a program in C# to display the first 10 natural numbers
-
+            Console.WriteLine($"The first 10 natural numbers are: {answer.Trim()}");
+            Console.ReadKey();
         }
     }
 }
