@@ -6,17 +6,19 @@ namespace Exercise2
     {
         static void Main(string[] args)
         {
-            int i, n;
-            
+            Console.WriteLine("Input base number : ");
+            int i = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Input number of terms : ");
-            n = Convert.ToInt32(Console.ReadLine());
-            /*
-            todo - complete loop to multiply i with itself n times, it is NOT allowed to use Math.Pow()
-            */
-            for (i = 0; i < n; i++)
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            int result = i;
+
+            for (int j = 1; j < n; j++)
             {
+                result *= i;
             }
 
+            Console.WriteLine($"{i} to the power of {n} is {result}");
             Console.ReadKey();
         }
     }
