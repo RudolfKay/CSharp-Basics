@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstLetterToUpper", "First
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountPosSumNeg", "CountPosSumNeg\CountPosSumNeg.csproj", "{6910DD05-A20A-449C-94A0-DFD9F661905F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingNemo", "FindingNemo\FindingNemo.csproj", "{CDF13D75-21BC-4B6D-A948-364D5277CFDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{6910DD05-A20A-449C-94A0-DFD9F661905F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6910DD05-A20A-449C-94A0-DFD9F661905F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6910DD05-A20A-449C-94A0-DFD9F661905F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDF13D75-21BC-4B6D-A948-364D5277CFDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDF13D75-21BC-4B6D-A948-364D5277CFDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDF13D75-21BC-4B6D-A948-364D5277CFDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDF13D75-21BC-4B6D-A948-364D5277CFDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
