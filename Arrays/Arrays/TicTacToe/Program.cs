@@ -38,7 +38,7 @@ namespace TicTacToe
         {
             char prevPlayer = 'O';
             
-            while (BoardNotFull() && !HasWon())
+            while (IsBoardFull() && !HasWon())
             {
                 char currPlayer = prevPlayer == 'O' ? 'X' : 'O';
                 int row = 0;
@@ -77,7 +77,7 @@ namespace TicTacToe
             }
         }
         
-        private static bool BoardNotFull()
+        private static bool IsBoardFull()
         {
             for (var r = 0; r < 3; r++)
             {
@@ -95,33 +95,13 @@ namespace TicTacToe
         private static bool HasWon()
         {
             //check by Row
-            if (board[0, 0] == board[0, 1] && board[0, 1] == board[0, 2] && board[0,0] != ' ')
-            {
-                return true;
-            }
-            else if (board[1, 0] == board[1, 1] && board[1, 1] == board[1, 2] && board[1, 0] != ' ')
-            {
-                return true;
-            }
-            else if (board[2, 0] == board[2, 1] && board[2, 1] == board[2, 2] && board[2, 0] != ' ')
-            {
-                return true;
-            }
-
+            return (board[0, 0] == board[0, 1] && board[0, 1] == board[0, 2] && board[0,0] != ' ') ||
+                    (board[1, 0] == board[1, 1] && board[1, 1] == board[1, 2] && board[1, 0] != ' ') ||
+                    (board[2, 0] == board[2, 1] && board[2, 1] == board[2, 2] && board[2, 0] != ' ') ||
             //check by Column
-            if (board[0, 0] == board[1, 0] && board[1, 0] == board[2, 0] && board[0, 0] != ' ')
-            {
-                return true;
-            }
-            else if (board[0, 1] == board[1, 1] && board[1, 1] == board[2, 1] && board[0, 1] != ' ')
-            {
-                return true;
-            }
-            else if (board[0, 2] == board[1, 2] && board[1, 2] == board[2, 2] && board[0, 2] != ' ')
-            {
-                return true;
-            }
-
+                    (board[0, 0] == board[1, 0] && board[1, 0] == board[2, 0] && board[0, 0] != ' ') ||
+                    (board[0, 1] == board[1, 1] && board[1, 1] == board[2, 1] && board[0, 1] != ' ') ||
+                    (board[0, 2] == board[1, 2] && board[1, 2] == board[2, 2] && board[0, 2] != ' ') ||
             //check by Diagonal
             if (board[0, 0] == board[1, 1] && board[1, 1] == board[2, 2] && board[0, 0] != ' ')
             {

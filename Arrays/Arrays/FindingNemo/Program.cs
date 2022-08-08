@@ -14,19 +14,19 @@ namespace FindingNemo
         static void FindNemo(string s)
         {
             string[] input = s.Split(' ');
-            bool nemoFound = false;
+            bool isNemoFound = false;
 
             for (int i = 0; i < input.Length; i++)
             {
                 if (input[i].Equals("Nemo"))
                 {
                     Console.WriteLine($"I found Nemo at {i+1}!");
-                    nemoFound = true;
+                    isNemoFound = true;
                     break;
                 }
             }
 
-            if (!nemoFound)
+            if (!isNemoFound)
             {
                 Console.WriteLine("I can't find Nemo :(");
             }

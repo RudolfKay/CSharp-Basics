@@ -14,7 +14,7 @@ namespace Exercise6
             int[] myArray2 = new int[10];
             Random random = new Random();
 
-            for (int i=0; i < myArray1.Length; i++)
+            for (int i = 0; i < myArray1.Length; i++)
             {
                 myArray1[i] = random.Next(1,100);
             }

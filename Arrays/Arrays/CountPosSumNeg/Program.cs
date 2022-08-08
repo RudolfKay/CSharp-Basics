@@ -40,8 +40,6 @@ namespace CountPosSumNeg
                 answer = new int[2];
                 answer[0] = posCount;
                 answer[1] = negSum;
-
-                return answer;
             }
 
             return answer;
