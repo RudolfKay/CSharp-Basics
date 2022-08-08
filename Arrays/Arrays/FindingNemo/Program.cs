@@ -14,7 +14,7 @@ namespace FindingNemo
         static void FindNemo(string s)
         {
             string[] input = s.Split(' ');
-            bool isNemoFound = false;
+            bool isNemoFound = new bool();
 
             for (int i = 0; i < input.Length; i++)
             {

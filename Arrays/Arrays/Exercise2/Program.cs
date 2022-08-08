@@ -25,7 +25,7 @@ namespace Exercise2
             int maxInt = int.Parse(maxInput);
             int minInt = int.Parse(minInput);
 
-            for (int i= minInt; i <= maxInt; i++)
+            for (int i = minInt; i <= maxInt; i++)
             {
                 sum += i;
             }
