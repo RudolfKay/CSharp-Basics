@@ -6,10 +6,10 @@ namespace Exercise1
     {
         static void Main(string[] args)
         {
-            int N = 10;
+            int n = 10;
             string answer = "";
 
-            for (int i = 1; i <= N; i++)
+            for (int i = 1; i <= n; i++)
             {
                 answer += $"{i} ";
             }

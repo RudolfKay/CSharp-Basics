@@ -18,12 +18,12 @@ namespace Exercise7
 
             Console.WriteLine("Welcome to Piglet!");
 
-            while (!GameEnded(currentRoll) && !endTrigger)
+            while (!IsGameOver(currentRoll) && !endTrigger)
             {
                 currentRoll = random.Next(1, 6);
                 score += currentRoll;
 
-                if (GameEnded(currentRoll))
+                if (IsGameOver(currentRoll))
                 {
                     score = 0;
                     Console.WriteLine($"You rolled a {currentRoll}!");
@@ -52,7 +52,7 @@ namespace Exercise7
             Console.ReadKey();
         }
 
-        static bool GameEnded(int number)
+        static bool IsGameOver (int number)
         {
             return number == 1;
         }
