@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankAccount
 {
@@ -10,6 +6,14 @@ namespace BankAccount
     {
         static void Main(string[] args)
         {
+            string name = "Benson";
+            decimal startBalance = (decimal)17.50;
+            BankAccount benben = new BankAccount(name, startBalance);
+            string nameBalance = benben.ShowUserNameAndBalance();
+
+            Console.WriteLine(nameBalance);
+
+            Console.ReadKey();
         }
     }
 }
