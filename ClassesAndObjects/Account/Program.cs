@@ -15,17 +15,17 @@ namespace Account
 
 
             Console.WriteLine("Initial state");
-            Console.WriteLine($"{A}");
-            Console.WriteLine($"{B}");
-            Console.WriteLine($"{C}\n");
+            Console.WriteLine(A);
+            Console.WriteLine(B);
+            Console.WriteLine(C+"\n");
 
             Transfer(A,B,50);
             Transfer(B,C,25);
 
             Console.WriteLine("Final state");
-            Console.WriteLine($"{A}");
-            Console.WriteLine($"{B}");
-            Console.WriteLine($"{C}");
+            Console.WriteLine(A);
+            Console.WriteLine(B);
+            Console.WriteLine(C);
 
             Console.ReadKey();
         }
