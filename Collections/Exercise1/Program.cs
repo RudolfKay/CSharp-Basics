@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Exercise1
 {
@@ -14,19 +11,70 @@ namespace Exercise1
            * BMW -> Germany
            * Honda -> Japan
            * Mercedes -> Germany
-           * VolksWagen -> Germany
+           * Volkswagen -> Germany
            * Tesla -> USA
            */
 
         private static void Main(string[] args)
         {
-            string[] array = { "Audi", "BMW", "Honda", "Mercedes", "VolksWagen", "Mercedes", "Tesla" };
+            string[] array = { "Audi", "BMW", "Honda", "Mercedes", "Volkswagen", "Mercedes", "Tesla" };
 
-            //todo - replace array with an List and print out the results
+            List<string> carsList = new List<string>(array);
 
-            //todo - replace array with a HashSet and print out the results
+            foreach (string car in carsList)
+            {
+                Console.WriteLine(car);
+            }
 
-            //todo - replace array with a Dictionary (use brand as key and origination as value) and print out the results
+            Console.WriteLine();
+
+            HashSet<string> carsHashSet = new HashSet<string>(array);
+
+            foreach (string car in carsHashSet)
+            {
+                Console.WriteLine(car);
+            }
+
+            Console.WriteLine();
+
+            Dictionary<string, string> carDictionary = new Dictionary<string, string>();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                string car = array[i];
+
+                if (!carDictionary.ContainsKey(car))
+                {
+                    switch (car)
+                    {
+                        case "Audi":
+                        case "BMW":
+                        case "Mercedes":
+                        case "Volkswagen":
+                            carDictionary.Add(car, "Germany");
+                            break;
+
+                        case "Honda":
+                            carDictionary.Add(car, "Japan");
+                            break;
+
+                        case "Tesla":
+                            carDictionary.Add(car, "USA");
+                            break;
+
+                        default:
+                            carDictionary.Add(car, "");
+                            break;
+                    }
+                }
+            }
+
+            foreach (string key in carDictionary.Keys)
+            {
+                Console.WriteLine($"Car: {key} | Origin: {carDictionary[key]}");
+            }
+
+            Console.ReadKey();
         }
     }
 }
