@@ -38,7 +38,7 @@ namespace Exercise3
 
         public void Burn()
         {
-            _currentFuel -= 1;
+            _currentFuel--;
         }
     }
 }
