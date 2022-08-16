@@ -50,17 +50,17 @@ namespace Exercise13
 
         public string GetPrice()
         {
-            CultureInfo uk = new CultureInfo("en-GB");
+            CultureInfo ukCultureInfo = new CultureInfo("en-GB");
 
             decimal price = _cost + (_cost * (decimal)1.5);
             _price = price;
 
-            return _price.ToString("C", uk);
+            return _price.ToString("C", ukCultureInfo);
         }
 
         public string GetCost()
         {
-            CultureInfo uk = new CultureInfo("en-GB");
+            CultureInfo ukCultureInfo = new CultureInfo("en-GB");
             decimal cost = 0;
 
             for (int i = 0; i < _ingredients.Length; i++)
@@ -101,7 +101,7 @@ namespace Exercise13
 
             _cost = cost;
 
-            return _cost.ToString("C", uk);
+            return _cost.ToString("C", ukCultureInfo);
         }
     }
 }
