@@ -23,7 +23,7 @@ namespace Exercise6
 
         public bool HasSameMotherAs(Dog otherDog)
         {
-            return _mother.GetName() == otherDog._mother.GetName();
+            return _mother.GetName() == otherDog.GetMothersName();
         }
 
         public string GetFathersName()
@@ -31,27 +31,24 @@ namespace Exercise6
             return _father == null ? "Unknown" : _father.GetName();
         }
 
+        public string GetMothersName()
+        {
+            return _mother == null ? "Unknown" : _mother.GetName();
+        }
+
         public string GetName()
         {
-            return $"{_name}";
+            return _name;
         }
 
         public string GetSex()
         {
-            return $"{_sex}";
+            return _sex;
         }
 
         public override string ToString()
         {
-            string unknownMother = "Unknown";
-
-            if (_mother != null)
-            {
-                return $"{_name} {_sex} {_mother.GetName()} {_father.GetFathersName()}";
-            }
-
-            return $"Name: {_name}, Sex: {_sex}, Mother: {unknownMother}, Father: {_father.GetFathersName()}.";
-
+            return $"Name: {_name}, Sex: {_sex}, Mother: {_mother.GetMothersName()}, Father: {_father.GetFathersName()}.";
         }
     }
 }
