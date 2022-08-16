@@ -8,15 +8,21 @@ namespace NumbersFromRange
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             var random = new Random();
             var numbers = new List<int>();
+
             while (numbers.Count() < 10)
             {
                 numbers.Add(random.Next(1, 100));
             }
 
-            //ToDo: Given an array of integers, write a query that returns list of numbers greater than 30 and less than 100.
+            var greaterLesserQuery = 
+                    (from num in numbers
+                    where num is < 100 and > 30
+                    select num).ToList();
+
+            Console.WriteLine(string.Join(", ",greaterLesserQuery));
+            Console.ReadKey();
         }
     }
 }
