@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ListExercise7
 {
@@ -19,7 +16,9 @@ namespace ListExercise7
                 "Black"
             };
 
-            //      TODO: Check if list contains "White" element
+            Console.WriteLine(colors.Contains("White"));
+
+            Console.ReadKey();
         }
     }
 }
