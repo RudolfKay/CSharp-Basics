@@ -75,7 +75,8 @@ For the purposes of this program, a word consists of a consecutive sequence of l
 
 See [FlightPlanner](./FlightPlanner)
 
-Write a console program that reads in a file containing flight destinations from various cities, and then allow the user to plan a round-trip flight route.
+Write a console program that reads in a file containing flight destinations from various cities,
+and then allow the user to plan a round-trip flight route.
 
 The flight data come from a file named flights.txt, which has the following format:
 
@@ -88,7 +89,8 @@ Your program should:
   - Display the complete list of cities;
   - Allow the user to select a city from which to start;
   - In a loop, print out all the destinations that the user may reach directly from the current city, and prompt the user to select the next city;
-  - Once the user has selected a round-trip route (i.e., once the user has selected a flight that returns them to the starting city) - exit from the loop and print out the route that was chosen.
+  - Once the user has selected a round-trip route
+	(i.e., once the user has selected a flight that returns them to the starting city) - exit from the loop and print out the route that was chosen.
 
 Program should start like this:
 
@@ -101,8 +103,11 @@ To select a city from which you would like to start press 1
 ...
 ```
 
-A critical issue in building this program is designing appropriate data structures to keep track of the information you'll need in order to produce flight plans. 
-You'll need to both have a way of keeping track of information on available flights that you read in from the flights.txt file, as well as a means for  keeping track of the flight routes that the user is choosing in constructing  their flight plan. Consider how both Lists and HashMaps might be useful to keep track of the information you care about.
+A critical issue in building this program is designing appropriate data structures to keep track of the information you'll need,
+in order to produce flight plans. 
+You'll need to both have a way of keeping track of information on available flights that you read in from the flights.txt file,
+as well as a means for  keeping track of the flight routes that the user is choosing in constructing  their flight plan.
+Consider how both Lists and HashMaps might be useful to keep track of the information you care about.
 
 ## Exercise #8
 
