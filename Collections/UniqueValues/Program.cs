@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace UniqueValues
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -12,6 +13,12 @@ namespace UniqueValues
 
             var values = new List<string> { "Hi", "Meow", "Hello", "Meow", "Hi!", "Meow", "Hi", "Bye" };
 
+            var uniqueValQuery = 
+                (from value in values
+                    select value).ToHashSet();
+            
+            Console.WriteLine(string.Join(", ",uniqueValQuery));
+            Console.ReadKey();
         }
     }
 }
