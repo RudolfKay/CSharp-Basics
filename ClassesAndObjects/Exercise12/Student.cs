@@ -18,6 +18,7 @@ namespace Exercise12
             {
                 Console.WriteLine("No tests taken!");
             }
+
             foreach (string test in _testsTaken)
             {
                 Console.WriteLine(test);

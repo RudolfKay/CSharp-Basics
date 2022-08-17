@@ -6,7 +6,6 @@ namespace Exercise13
     public class Smoothie
     {
         private readonly string[] _ingredients;
-        private string _name;
         private decimal _price;
         private decimal _cost;
 
@@ -43,9 +42,7 @@ namespace Exercise13
                 name += $"Smoothie";
             }
 
-            _name = name;
-
-            return _name;
+            return name;
         }
 
         public string GetPrice()

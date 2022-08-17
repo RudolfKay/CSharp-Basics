@@ -42,6 +42,5 @@ namespace Exercise4
         {
             return $"Title: {_title}, Studio: {_studio}, Rating: {_rating}";
         }
-
     }
 }

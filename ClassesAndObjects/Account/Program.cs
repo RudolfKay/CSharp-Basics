@@ -13,7 +13,6 @@ namespace Account
             Account B = new Account("B", 0, enUS);
             Account C = new Account("C", 0, enUS);
 
-
             Console.WriteLine("Initial state");
             Console.WriteLine(A);
             Console.WriteLine(B);

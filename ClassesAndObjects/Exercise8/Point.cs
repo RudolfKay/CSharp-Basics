@@ -21,6 +21,5 @@ namespace Exercise8
             _x = newX;
             _y = newY;
         }
-
     }
 }
