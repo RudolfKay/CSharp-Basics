@@ -1,33 +1,39 @@
-﻿namespace Account
+﻿using System.Globalization;
+
+namespace Account
 {
     class Account
     {
+        private readonly CultureInfo _formatCulture;
         private string _name;
         private double _money;
 
-        public Account(string v1, double v2)
+        public Account(string name, double startingBalance, CultureInfo locale)
         {
-            
+            _formatCulture = locale;
+            _name = name;
+            _money = startingBalance;
         }
 
-        public double Withdrawal(double i)
+        public void Withdrawal(double amount)
         {
-            return i;
+            _money -= amount;
         }
 
-        public void Deposit(double i)
+        public void Deposit(double amount)
         {
-            
+            _money += amount;
         }
 
-        public double Balance()
+        public string Balance()
         {
-            return _money;
+            return _money.ToString("C", _formatCulture);
         }
 
         public override string ToString()
         {
-            return $"{_name}: {_money}";
+            
+            return $"{_name}: {_money.ToString("C", _formatCulture)}";
         }
 
         public string Name

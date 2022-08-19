@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{40352489-4287-4C39-879A-55BB1A9ED983}</ProjectGuid>
+    <ProjectGuid>{E07F2CEA-9BDB-430C-84F5-37B6EE2D63AB}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>VideoStore</RootNamespace>
-    <AssemblyName>VideoStore</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>Exercise12</RootNamespace>
+    <AssemblyName>Exercise12</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -43,10 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="VideoStoreTest.cs" />
+    <Compile Include="IStudent.cs" />
+    <Compile Include="ITestpaper.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Video.cs" />
-    <Compile Include="VideoStore.cs" />
+    <Compile Include="Student.cs" />
+    <Compile Include="TestPaper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
