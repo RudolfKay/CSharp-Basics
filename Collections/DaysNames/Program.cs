@@ -1,2 +1,18 @@
-﻿// See https://aka.ms/new-console-template for more information
-//ToDo: Write a query that returns names of days
+﻿using System;
+using System.Linq;
+
+namespace DaysNames
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            foreach (var day in Enum.GetNames(typeof(DayOfWeek)))
+            {
+                Console.WriteLine(day);
+            }
+
+            Console.ReadKey();
+        }
+    }
+}

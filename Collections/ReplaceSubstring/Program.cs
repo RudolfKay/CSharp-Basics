@@ -1,14 +1,27 @@
 ﻿using System;
+using System.Linq;
 
 namespace ReplaceSubstring
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
             var words = new[] { "near", "speak", "tonight", "weapon", "customer", "deal", "lawyer" };
-            //ToDo: Write a query that replaces 'ea' substring with astersik (*) in given list of words.
-            //ToDo: "learn", "current", "deal" →  "l*rn", "current", "d*l"
+
+            var wordQuery =
+                (from word in words
+                    where word.Contains("ea")
+                    select word);
+
+            foreach (string word in wordQuery)
+            {
+                int indexOfWord = Array.IndexOf(words, word);
+                words.SetValue(word.Replace("ea","*"),indexOfWord);
+            }
+
+            Console.WriteLine(string.Join(", ", words));
+            Console.ReadKey();
         }
     }
 }

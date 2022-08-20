@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Net.Sockets;
 
 namespace DecryptNumber
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -16,6 +18,19 @@ namespace DecryptNumber
                 "!)(^&(#@",
                 "!)(#&%(*@#%"
             };
+
+            var decryptKey = new List<char>() { ')', '!', '@', '#', '$', '%', '^', '&', '*', '(' };
+
+            foreach (string encrypted in cryptedNumbers)
+            {
+                var decryptQuery =
+                    (from character in encrypted
+                        select decryptKey.IndexOf(character)).ToList();
+
+                Console.WriteLine(string.Join("", decryptQuery));
+            }
+
+            Console.ReadKey();
         }
     }
 }
