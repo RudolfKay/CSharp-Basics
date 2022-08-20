@@ -1,22 +1,22 @@
-using System;
+﻿using System;
 
 namespace DragRace
 {
-    public class Bmw : ICar
+    class McLaren : ICar
     {
         public int _currentSpeed = 0;
 
-        public void SpeedUp() 
+        public void SpeedUp()
         {
-            _currentSpeed += 2;
+            _currentSpeed += 4;
         }
 
-        public void SlowDown() 
+        public void SlowDown()
         {
-            _currentSpeed -= 2;
+            _currentSpeed -= 3;
         }
 
-        public int ShowCurrentSpeed() 
+        public int ShowCurrentSpeed()
         {
             return _currentSpeed;
         }

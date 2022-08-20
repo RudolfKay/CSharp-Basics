@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 
 namespace DragRace
 {
-    public class Audi : ICar
+    class Buick : ICar , INitrous
     {
         public int _currentSpeed = 0;
 
         public void SpeedUp()
         {
-            _currentSpeed += 2;
+            _currentSpeed++;
         }
 
         public void SlowDown()
@@ -16,7 +16,12 @@ namespace DragRace
             _currentSpeed--;
         }
 
-        public int ShowCurrentSpeed() 
+        public void UseNitrousOxideEngine()
+        {
+            _currentSpeed += 4;
+        }
+
+        public int ShowCurrentSpeed()
         {
             return _currentSpeed;
         }
