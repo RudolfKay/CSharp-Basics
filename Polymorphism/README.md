@@ -7,7 +7,8 @@ See [DragRace](./DragRace.)
 
 See [MakeSounds](./MakeSounds)
 
-Scenario: We have the idea that an object could also be associated with a Sound, which can be played when requested by a client program. We can capture this behaviour in an interface class. We will model the sound with a String description.
+Scenario: We have the idea that an object could also be associated with a Sound, which can be played when requested by a client program.
+We can capture this behaviour in an interface class. We will model the sound with a String description.
 
 Create two more classes:
 
@@ -24,7 +25,8 @@ Write C# code to implement the following inheritance hierarchy:
 
 The two sub classes Student and Employee should override display() method.
  
-In Student, display() should show GPA and the other attributes in the super class. And in Employee, display() should show the job title and the other attributes in the super class.
+In Student, display() should show GPA and the other attributes in the super class. And in Employee,
+display() should show the job title and the other attributes in the super class.
 
 Write a main program that should do the following:
 
@@ -35,7 +37,9 @@ Write a main program that should do the following:
 
 See [Firm](./Firm)
 
-The program illustrates inheritance and polymorphism. In this exercise you will add one more employee type to the class hierarchy. The employee will be one that is an hourly employee but also earns a commission on sales. Hence the class, which we'll name Commission, will be derived from the Hourly class.
+The program illustrates inheritance and polymorphism. In this exercise you will add one more employee type to the class hierarchy.
+The employee will be one that is an hourly employee but also earns a commission on sales.
+Hence the class, which we'll name Commission, will be derived from the Hourly class.
 
 Write a class named Commission with the following features:
 
@@ -96,9 +100,12 @@ Input should be read from the console. Every even line will contain information 
 {AnimalType} {AnimalName} {AnimalWeight} {AnimalLivingRegion} [{CatBreed} = Only if its cat]
 ```
 
-On the odd lines you will receive information about the food that you should give to the Animal. The line will consist of FoodType and quantity separated by a whitespace.
+On the odd lines you will receive information about the food that you should give to the Animal.
+The line will consist of FoodType and quantity separated by a whitespace.
 
-You should build the logic to determine if the animal is going to eat the provided food. The Mouse and Zebra should check if the food is a Vegetable. If it is they will eat it. Otherwise you should print a message in the format:
+You should build the logic to determine if the animal is going to eat the provided food.
+The Mouse and Zebra should check if the food is a Vegetable. If it is they will eat it.
+Otherwise you should print a message in the format:
 
 ```
 {AnimalType} are not eating that type of food!
@@ -106,7 +113,9 @@ You should build the logic to determine if the animal is going to eat the provid
 
 Cats eat any kind of food, but Tigers accept only Meat. If Vegetable is provided to a tiger message like the one above should be printed on the console.
 
-After you read information about the Animal and Food then invoke makeSound() method of the current animal and then feed it. At the end print the whole object and proceed reading information about the next animal/food. The input will continue until you receive “End”. After that print the information of all received animals in format:
+After you read information about the Animal and Food then invoke makeSound() method of the current animal and then feed it.
+At the end print the whole object and proceed reading information about the next animal/food. The input will continue until you receive “End”.
+After that print the information of all received animals in format:
 
 ```
 {AnimalType} [{AnimalName}, {CatBreed}, {AnimalWeight}, {AnimalLivingRegion}, {FoodEaten}]
