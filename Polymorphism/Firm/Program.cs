@@ -11,6 +11,8 @@ namespace Firm
         {
             var personnel = new Staff();
             personnel.Payday();
+
+            Console.ReadKey();
         }
     }
 }

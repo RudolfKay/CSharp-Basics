@@ -28,6 +28,7 @@ namespace Firm
         {
             var payment = base.Pay() + _bonus;
             _bonus = 0;
+
             return payment;
         }
     }
