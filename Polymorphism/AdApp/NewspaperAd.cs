@@ -2,22 +2,29 @@ namespace AdApp
 {
     public class NewspaperAd : Advert
     {
-        private int column;
-        private int rate;
+        private int _column;
+        private int _rate;
 
-        public NewspaperAd(int fee) : base(fee)
+        public NewspaperAd(int fee, int rate, int column) : base(fee)
         {
+            _rate = rate;
+            _column = column;
         }
 
-        private new int Cost()
+        public override int Cost()
         {
             var fee = base.Cost();
-            return fee;
+            var columnPrice = (_rate * _column);
+
+            return fee + columnPrice;
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            var result = base.ToString();
+            result += $"\nType: Newspaper Ad\nRate: £{_rate} per Cm\nColumn size: {_column}cm\n";
+
+            return result;
         }
     }
 }
