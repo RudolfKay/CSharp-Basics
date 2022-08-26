@@ -31,7 +31,6 @@ namespace DragRace
 
             for (int i = 0; i <= 10; i++)
             {
-
                 foreach (ICar car in cars)
                 {
                     if (i == 0)

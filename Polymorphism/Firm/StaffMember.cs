@@ -24,6 +24,7 @@ namespace Firm
             var result = "Name: " + _name + "\n";
             result += "Address: " + _address + "\n";
             result += "Phone: " + _phone;
+
             return result;
         }
 
