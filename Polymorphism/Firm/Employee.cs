@@ -4,9 +4,8 @@ namespace Firm
 {
     public class Employee : StaffMember
     {
-        private string socialSecurityNumber;
-
-        protected double payRate;
+        private string _socialSecurityNumber;
+        protected double _payRate;
 
         //-----------------------------------------------------------------
         // Sets up an employee with the specified information.
@@ -14,8 +13,8 @@ namespace Firm
         public Employee(string eName, string eAddress, string ePhone,
             string socSecNumber, double rate) : base(eName, eAddress, ePhone)
         {
-            socialSecurityNumber = socSecNumber;
-            payRate = rate;
+            _socialSecurityNumber = socSecNumber;
+            _payRate = rate;
         }
 
         //-----------------------------------------------------------------
@@ -24,7 +23,8 @@ namespace Firm
          public override string ToString() 
         {
              var result = base.ToString();
-             result += "\nSocial Security Number: " + socialSecurityNumber;
+             result += "\nSocial Security Number: " + _socialSecurityNumber;
+
              return result;
          }
 
@@ -33,7 +33,7 @@ namespace Firm
         //-----------------------------------------------------------------
         public override double Pay()
         {
-            return payRate;
+            return _payRate;
         }
     }
 }
