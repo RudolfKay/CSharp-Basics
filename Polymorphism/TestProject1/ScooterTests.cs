@@ -1,8 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
-using ScooterRental;
 
-namespace TestProject1
+namespace ScooterRental.Tests
 {
     [TestClass]
     public class ScooterTests
@@ -13,7 +12,9 @@ namespace TestProject1
         public void ScooterCreation_IDAndPricePerMinuteSetCorrectly()
         {
             _scooter = new Scooter("1", 0.2m);
-            _scooter.Should().Be(1);
+            _scooter.Id.Should().Be("1");
+            _scooter.PricePerMinute.Should().Be(0.2m);
+            _scooter.IsRented.Should().BeFalse();
         }
     }
 }
