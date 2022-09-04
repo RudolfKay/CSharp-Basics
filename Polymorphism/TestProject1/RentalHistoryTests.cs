@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ScooterRental.Exceptions;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using ScooterRental.Exceptions;
+using FluentAssertions;
+using System;
 
 namespace ScooterRental.Tests
 {
@@ -12,7 +12,6 @@ namespace ScooterRental.Tests
         private ScooterService _scooterService;
         private List<Scooter> _inventory;
         private RentalHistory _rentalHistory;
-        private RentalCompany _rentalCompany;
         private List<RentedScooter> _rentedInventory;
 
         [TestInitialize]
@@ -26,8 +25,7 @@ namespace ScooterRental.Tests
             {
                 _scooterService.AddScooter($"{i}", 0.2m);
             }
-
-            _rentalCompany = new RentalCompany("Cheeki Breeki", _rentedInventory, _scooterService);
+            
             _rentalHistory = new RentalHistory(_scooterService);
         }
 

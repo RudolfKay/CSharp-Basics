@@ -55,42 +55,88 @@ namespace ScooterRental
             }
 
             rentedScoot.EndTime = DateTime.UtcNow;
-            TimeSpan rentTimeSpan = (DateTime)rentedScoot.EndTime - rentedScoot.StarTime;
             scoot.IsRented = false;
             //_rentedScooters.Remove(rentedScoot);
 
-            return GetFee(rentTimeSpan, scoot.PricePerMinute);
+            return GetFee(rentedScoot);
         }
 
-        public decimal GetFee(TimeSpan timeRented, decimal pricePerMin)
+        public decimal GetFee(RentedScooter rentedScooter)
         {
+            DateTime startRentTime = rentedScooter.StarTime;
+            DateTime endRentTime = (DateTime)rentedScooter.EndTime;
+            TimeSpan timeSpanRented = endRentTime - startRentTime;
+
+            decimal pricePerMin = rentedScooter.PricePerMinute;
             decimal amount = 0.0m;
             decimal maxDailyCharge = 20.0m;
 
-            int totalMinutesRented = (int)timeRented.TotalMinutes;
-            int fullDaysRented = (int)timeRented.TotalDays;
-            int minutesInDay = 1440;
-            int hours = timeRented.Hours;
-            int minutes = timeRented.Minutes;
+            int fullDaysRented = (int)timeSpanRented.TotalDays;
+            int hourDifference = (int)timeSpanRented.Hours;
+            int minuteDifference = (int)timeSpanRented.Minutes;
+            int startHours = startRentTime.Hour;
+            int endHours = endRentTime.Hour;
+            int endMinutes = endRentTime.Minute;
 
             if (fullDaysRented > 0)
             {
                 amount += (maxDailyCharge * fullDaysRented);
+
+                if (startHours > endHours)
+                {
+                    if ((60 * endHours + endMinutes) * pricePerMin < maxDailyCharge)
+                    {
+                        amount += (60 * endHours + endMinutes) * pricePerMin;
+                    }
+
+                    if ((60 * endHours + endMinutes) * pricePerMin > maxDailyCharge)
+                    {
+                        amount += maxDailyCharge;
+                    }
+                }
+
+                else if (startHours < endHours)
+                {
+                    if ((60 * hourDifference + minuteDifference) * pricePerMin < maxDailyCharge)
+                    {
+                        amount += (60 * hourDifference + minuteDifference) * pricePerMin;
+                    }
+
+                    if ((60 * hourDifference + minuteDifference) * pricePerMin > maxDailyCharge)
+                    {
+                        amount += maxDailyCharge;
+                    }
+                }
             }
 
-            if ((hours * 60 + minutes) * pricePerMin < maxDailyCharge)
+            if (fullDaysRented == 0)
             {
-                amount += (minutes + hours * 60) * pricePerMin;
-            }
+                if (startHours > endHours)
+                {
+                    if ((60 * hourDifference + minuteDifference) * pricePerMin < maxDailyCharge)
+                    {
+                        amount += (60 * hourDifference + minuteDifference) * pricePerMin;
+                    }
 
-            if ((hours * 60 + minutes) * pricePerMin > maxDailyCharge)
-            {
-                amount += maxDailyCharge;
+                    if ((60 * hourDifference + minuteDifference) * pricePerMin > maxDailyCharge)
+                    {
+                        amount += maxDailyCharge;
+                    }
+                }
+
+                else if (startHours < endHours)
+                {
+                    if ((60 * hourDifference + minuteDifference) * pricePerMin < maxDailyCharge)
+                    {
+                        amount += (60 * hourDifference + minuteDifference) * pricePerMin;
+                    }
+
+                    if ((60 * hourDifference + minuteDifference) * pricePerMin > maxDailyCharge)
+                    {
+                        amount += maxDailyCharge;
+                    }
+                }
             }
-            /*else
-            {
-                amount += totalMinutesRented * pricePerMin;
-            }*/
 
             return amount;
         }
@@ -106,10 +152,9 @@ namespace ScooterRental
                 foreach (RentedScooter rentedScooter in tempRentedScooters)
                 {
                     rentedScooter.EndTime = DateTime.UtcNow;
-                    TimeSpan rentTimeSpan = (DateTime)rentedScooter.EndTime - rentedScooter.StarTime;
 
                     string rentedId = rentedScooter.Id;
-                    decimal currentFee = GetFee(rentTimeSpan, rentedScooter.PricePerMinute);
+                    decimal currentFee = GetFee(rentedScooter);
 
                     foreach (Scooter s in scooterHistory.Keys)
                     {

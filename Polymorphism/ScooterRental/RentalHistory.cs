@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ScooterRental.Exceptions;
 using ScooterRental.Interfaces;
 
@@ -9,12 +8,10 @@ namespace ScooterRental
     {
         private Dictionary<Scooter, Dictionary<int, decimal>> _history { get; }
                     //<Key: Scooter, Value: <Key: year, Value: profits.>>
-        private IScooterService _scooterService;
         private IList<Scooter> _scooters;
 
         public RentalHistory(IScooterService scooterService)
         {
-            _scooterService = scooterService;
             _scooters = scooterService.GetScooters();
             _history = new Dictionary<Scooter, Dictionary<int, decimal>>();
 

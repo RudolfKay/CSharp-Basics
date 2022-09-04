@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using ScooterRental.Exceptions;
 using ScooterRental.Interfaces;
 using FluentAssertions;
-using System;
 using System.Linq;
+using System;
 
 namespace ScooterRental.Tests
 {
