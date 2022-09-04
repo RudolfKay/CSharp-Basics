@@ -1,8 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScooterRental.Exceptions;
 using System;
-using FluentAssertions;
-using ScooterRental.Interfaces;
 using System.Collections.Generic;
 
 namespace ScooterRental.Tests
@@ -13,7 +12,7 @@ namespace ScooterRental.Tests
         private ScooterService _scooterService;
         private List<Scooter> _inventory;
         private RentalHistory _rentalHistory;
-        //private RentalCompany _rentalCompany;
+        private RentalCompany _rentalCompany;
         private List<RentedScooter> _rentedInventory;
 
         [TestInitialize]
@@ -22,13 +21,13 @@ namespace ScooterRental.Tests
             _inventory = new List<Scooter>();
             _rentedInventory = new List<RentedScooter>();
             _scooterService = new ScooterService(_inventory);
-            //_rentalCompany = new RentalCompany("Cheeki Breeki", _rentedInventory, _scooterService);
 
             for (int i = 1; i <= 5; i++)
             {
-                _scooterService.AddScooter($"{i}",0.2m);
+                _scooterService.AddScooter($"{i}", 0.2m);
             }
 
+            _rentalCompany = new RentalCompany("Cheeki Breeki", _rentedInventory, _scooterService);
             _rentalHistory = new RentalHistory(_scooterService);
         }
 
@@ -41,14 +40,53 @@ namespace ScooterRental.Tests
         [TestMethod]
         public void AddIncome_AddIncomeWithInvalidYear_ThrowsYearNotValidException()
         {
-            //_rentalHistory.
             Scooter scooter = _scooterService.GetScooterById("2");
 
             Action act = () =>
-                _rentalHistory.AddIncome(scooter,0,2.5m);
+                _rentalHistory.AddIncome(scooter, 0, 2.5m);
 
             act.Should().Throw<YearNotValidException>()
                 .WithMessage("Year is not in records");
+        }
+
+        [TestMethod]
+        public void AddIncome_AddIncomeWithInvalidScooter_ThrowsScooterDoesNotExistException()
+        {
+            Scooter scooter = new Scooter("8", 0.2m);
+
+            Action act = () =>
+                _rentalHistory.AddIncome(scooter, 2010, 2.5m);
+
+            act.Should().Throw<ScooterDoesNotExistException>()
+                .WithMessage("Scooter with ID 8 does not exist.");
+        }
+
+        [TestMethod]
+        public void AddIncome_AddIncomeWithNullScooter_ThrowsNullScooterException()
+        {
+            Scooter scooter = null;
+
+            Action act = () =>
+                _rentalHistory.AddIncome(scooter, 2010, 2.5m);
+
+            act.Should().Throw<NullScooterException>()
+                .WithMessage("Scooter is Null");
+        }
+
+        [TestMethod]
+        public void AddIncome_AddInvalidIncomeAmount_ThrowsInvalidIncomeException()
+        {
+            Scooter scooter = _scooterService.GetScooterById("1");
+
+            Action act1 = () =>
+                _rentalHistory.AddIncome(scooter, 2010, 0);
+            Action act2 = () =>
+                _rentalHistory.AddIncome(scooter, 2010, -0.2m);
+
+            act1.Should().Throw<InvalidIncomeException>()
+                .WithMessage("Income amount is not valid");
+            act2.Should().Throw<InvalidIncomeException>()
+                .WithMessage("Income amount is not valid");
         }
     }
 }

@@ -24,32 +24,37 @@ namespace ScooterRental
             }
         }
 
-        public void AddIncome(Scooter scooter, int year, decimal profit)
+        public void AddIncome(Scooter scooter, int year, decimal income)
         {
-            if (scooter == null || !_history.ContainsKey(scooter))
+            if (scooter == null)
             {
-                throw new NotImplementedException();
+                throw new NullScooterException();
             }
 
-            if (year <= 2010)
+            if (!_history.ContainsKey(scooter))
+            {
+                throw new ScooterDoesNotExistException(scooter.Id);
+            }
+
+            if (year < 2010 || year > 2022)
             {
                 throw new YearNotValidException();
             }
 
-            if (profit <= 0)
+            if (income <= 0.00m)
             {
-                throw new NotImplementedException();
+                throw new InvalidIncomeException();
             }
 
             if (!_history[scooter].ContainsKey(year))
             {
-                _history[scooter].Add(year, profit);
+                _history[scooter].Add(year, income);
             }
             else
             {
                 Dictionary<int, decimal> info = _history[scooter];
 
-                info[year] += profit;
+                info[year] += income;
             }
         }
 
