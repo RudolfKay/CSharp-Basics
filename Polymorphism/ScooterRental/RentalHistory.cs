@@ -1,24 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using ScooterRental.Exceptions;
 using ScooterRental.Interfaces;
+using System.Collections.Generic;
 
 namespace ScooterRental
 {
     public class RentalHistory
     {
-        private Dictionary<Scooter, Dictionary<int, decimal>> _history { get; }
-                    //<Key: Scooter, Value: <Key: year, Value: profits.>>
-        private IList<Scooter> _scooters;
+        private readonly IList<Scooter> _scooters;
+        private Dictionary<Scooter, Dictionary<int, decimal>> History { get; }
+                    //<Key: Scooter, Value: <Key: year, Value: profit>>
 
         public RentalHistory(IScooterService scooterService)
         {
             _scooters = scooterService.GetScooters();
-            _history = new Dictionary<Scooter, Dictionary<int, decimal>>();
+            History = new Dictionary<Scooter, Dictionary<int, decimal>>();
 
             foreach (Scooter s in _scooters)
             {
-                _history.Add(s, new Dictionary<int,decimal>());
+                History.Add(s, new Dictionary<int, decimal>());
             }
+        }
+
+        public void UpdateRental(Scooter s, int? year, decimal profit)
+        {
+            var yearAndProfit = new Dictionary<int, decimal>();
+
+            if (year == null)
+            {
+                int thisYear = DateTime.UtcNow.Year;
+                yearAndProfit.Add(thisYear, profit);
+            }
+            else
+            {
+                yearAndProfit.Add((int)year, profit);
+            }
+
+            History[s] = yearAndProfit;
         }
 
         public void AddIncome(Scooter scooter, int year, decimal income)
@@ -28,7 +46,7 @@ namespace ScooterRental
                 throw new NullScooterException();
             }
 
-            if (!_history.ContainsKey(scooter))
+            if (!History.ContainsKey(scooter))
             {
                 throw new ScooterDoesNotExistException(scooter.Id);
             }
@@ -38,44 +56,21 @@ namespace ScooterRental
                 throw new YearNotValidException();
             }
 
-            if (income <= 0.00m)
+            if (income < 0.00m)
             {
                 throw new InvalidIncomeException();
             }
 
-            if (!_history[scooter].ContainsKey(year))
+            if (!History[scooter].ContainsKey(year))
             {
-                _history[scooter].Add(year, income);
+                History[scooter].Add(year, income);
             }
             else
             {
-                Dictionary<int, decimal> info = _history[scooter];
+                Dictionary<int, decimal> info = History[scooter];
 
                 info[year] += income;
-            }
-        }
-
-        public Dictionary<Scooter, Dictionary<int, decimal>> GetHistory(int? year)
-        {
-            if (year == null)
-            {
-                return _history;
-            }
-            else
-            {
-                var historyByYear = new Dictionary<Scooter, Dictionary<int, decimal>>();
-
-                foreach (Scooter s in _history.Keys)
-                {
-                    Dictionary<int, decimal> info = _history[s];
-
-                    if (info.ContainsKey((int)year))
-                    {
-                        historyByYear.Add(s, info);
-                    }
-                }
-
-                return historyByYear;
+                History[scooter] = info;
             }
         }
 
@@ -85,9 +80,9 @@ namespace ScooterRental
 
             if (year == null)
             {
-                foreach (Scooter s in _history.Keys)
+                foreach (Scooter s in History.Keys)
                 {
-                    Dictionary<int, decimal> info = _history[s];
+                    Dictionary<int, decimal> info = History[s];
 
                     foreach (int key in info.Keys)
                     {
@@ -108,6 +103,28 @@ namespace ScooterRental
             }
 
             return profit;
+        }
+
+        public Dictionary<Scooter, Dictionary<int, decimal>> GetHistory(int? year)
+        {
+            if (year == null)
+            {
+                return History;
+            }
+
+            var historyByYear = new Dictionary<Scooter, Dictionary<int, decimal>>();
+
+            foreach (Scooter s in History.Keys)
+            {
+                Dictionary<int, decimal> info = History[s];
+
+                if (info.ContainsKey((int)year))
+                {
+                    historyByYear.Add(s, info);
+                }
+            }
+
+            return historyByYear;
         }
     }
 }

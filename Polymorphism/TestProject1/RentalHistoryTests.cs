@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ScooterRental.Exceptions;
 using FluentAssertions;
 using System;
+using ScooterRental.Interfaces;
 
 namespace ScooterRental.Tests
 {
@@ -13,6 +14,7 @@ namespace ScooterRental.Tests
         private List<Scooter> _inventory;
         private RentalHistory _rentalHistory;
         private List<RentedScooter> _rentedInventory;
+        private RentalCompany _rentalCompany;
 
         [TestInitialize]
         public void Setup()
@@ -26,6 +28,7 @@ namespace ScooterRental.Tests
                 _scooterService.AddScooter($"{i}", 0.2m);
             }
             
+            _rentalCompany = new RentalCompany("Cheeki Breeki", _rentedInventory, _scooterService);
             _rentalHistory = new RentalHistory(_scooterService);
         }
 
@@ -76,15 +79,41 @@ namespace ScooterRental.Tests
         {
             Scooter scooter = _scooterService.GetScooterById("1");
 
-            Action act1 = () =>
-                _rentalHistory.AddIncome(scooter, 2010, 0);
-            Action act2 = () =>
+            Action act = () =>
                 _rentalHistory.AddIncome(scooter, 2010, -0.2m);
 
-            act1.Should().Throw<InvalidIncomeException>()
+            act.Should().Throw<InvalidIncomeException>()
                 .WithMessage("Income amount is not valid");
-            act2.Should().Throw<InvalidIncomeException>()
-                .WithMessage("Income amount is not valid");
+        }
+
+        [TestMethod]
+        public void GetHistory_AddValidScootersWithoutYear_HistoryIsCorrect()
+        {
+            _rentalCompany.StartRent("1");
+            _rentalCompany.StartRent("2");
+            _rentalCompany.StartRent("3");
+            _rentalCompany.EndRent("1");
+            _rentalCompany.EndRent("2");
+            _rentalCompany.EndRent("3");
+
+            var history = _rentalHistory.GetHistory(null);
+
+            history.Count.Should().Be(5);
+        }
+
+        [TestMethod]
+        public void GetHistory_AddValidScootersWithYear_HistoryIsCorrect()
+        {
+            _rentalCompany.StartRent("1");
+            _rentalCompany.StartRent("2");
+            _rentalCompany.StartRent("3");
+            _rentalCompany.EndRent("1");
+            _rentalCompany.EndRent("2");
+            _rentalCompany.EndRent("3");
+
+            var history = _rentalHistory.GetHistory(2022);
+
+            history.Count.Should().Be(3);
         }
     }
 }
