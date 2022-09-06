@@ -2,41 +2,40 @@
 using ScooterRental.Exceptions;
 using ScooterRental.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ScooterRental
 {
     public class RentalHistory
     {
-        private readonly IList<Scooter> _scooters;
         private Dictionary<Scooter, Dictionary<int, decimal>> History { get; }
                     //<Key: Scooter, Value: <Key: year, Value: profit>>
+        private List<RentedScooter> _history;
 
-        public RentalHistory(IScooterService scooterService)
+        public RentalHistory(List<RentedScooter> history)
         {
-            _scooters = scooterService.GetScooters();
             History = new Dictionary<Scooter, Dictionary<int, decimal>>();
-
-            foreach (Scooter s in _scooters)
-            {
-                History.Add(s, new Dictionary<int, decimal>());
-            }
+            _history = history;
         }
 
-        public void UpdateRental(Scooter s, int? year, decimal profit)
+        public void AddRent(Scooter scooter, DateTime starTime)
         {
-            var yearAndProfit = new Dictionary<int, decimal>();
+            _history.Add(new RentedScooter(scooter.Id, scooter.PricePerMinute, starTime));
+        }
 
-            if (year == null)
+        public RentedScooter UpdateRental(Scooter scooter, DateTime endTime)
+        {
+            var rental = _history.FirstOrDefault(s => s.Id == scooter.Id && !s.EndTime.HasValue);
+
+            if (rental == null)
             {
-                int thisYear = DateTime.UtcNow.Year;
-                yearAndProfit.Add(thisYear, profit);
-            }
-            else
-            {
-                yearAndProfit.Add((int)year, profit);
+                throw new NullScooterException();
+
             }
 
-            History[s] = yearAndProfit;
+            rental.EndTime = endTime;
+
+            return rental;
         }
 
         public void AddIncome(Scooter scooter, int year, decimal income)
@@ -48,12 +47,8 @@ namespace ScooterRental
 
             if (!History.ContainsKey(scooter))
             {
-                throw new ScooterDoesNotExistException(scooter.Id);
-            }
-
-            if (year < 2010 || year > 2022)
-            {
-                throw new YearNotValidException();
+                History.Add(scooter, new Dictionary<int, decimal>());
+                //throw new ScooterDoesNotExistException(scooter.Id);
             }
 
             if (income < 0.00m)
@@ -67,14 +62,11 @@ namespace ScooterRental
             }
             else
             {
-                Dictionary<int, decimal> info = History[scooter];
-
-                info[year] += income;
-                History[scooter] = info;
+                History[scooter][year] += income;
             }
         }
 
-        public decimal GetIncome(int? year)
+        /*public decimal GetIncome(int? year)
         {
             decimal profit = 0.0m;
 
@@ -103,7 +95,7 @@ namespace ScooterRental
             }
 
             return profit;
-        }
+        }*/
 
         public Dictionary<Scooter, Dictionary<int, decimal>> GetHistory(int? year)
         {
@@ -118,13 +110,26 @@ namespace ScooterRental
             {
                 Dictionary<int, decimal> info = History[s];
 
-                if (info.ContainsKey((int)year))
+                if (info.ContainsKey(year.Value))
                 {
+                    //var income = info[year.Value];
                     historyByYear.Add(s, info);
                 }
             }
 
             return historyByYear;
+        }
+
+        public List<RentedScooter> GetIncompleteRentals(int? year)
+        {
+            var rentals = _history.Where(r => !r.EndTime.HasValue).ToList();
+
+            if (year.HasValue)
+            {
+                rentals = rentals.Where(r => r.StarTime.Year == year).ToList();
+            }
+
+            return rentals;
         }
     }
 }
