@@ -1,16 +1,16 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using ScooterRental.Exceptions;
 using ScooterRental.Interfaces;
-using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace ScooterRental
 {
-    public class RentalHistory
+    public class RentalHistory : IRentalHistory
     {
-        private Dictionary<Scooter, Dictionary<int, decimal>> History { get; }
+        private readonly List<RentedScooter> _history;
+        public Dictionary<Scooter, Dictionary<int, decimal>> History { get; }
                     //<Key: Scooter, Value: <Key: year, Value: profit>>
-        private List<RentedScooter> _history;
 
         public RentalHistory(List<RentedScooter> history)
         {
@@ -21,21 +21,6 @@ namespace ScooterRental
         public void AddRent(Scooter scooter, DateTime starTime)
         {
             _history.Add(new RentedScooter(scooter.Id, scooter.PricePerMinute, starTime));
-        }
-
-        public RentedScooter UpdateRental(Scooter scooter, DateTime endTime)
-        {
-            var rental = _history.FirstOrDefault(s => s.Id == scooter.Id && !s.EndTime.HasValue);
-
-            if (rental == null)
-            {
-                throw new NullScooterException();
-
-            }
-
-            rental.EndTime = endTime;
-
-            return rental;
         }
 
         public void AddIncome(Scooter scooter, int year, decimal income)
@@ -66,36 +51,32 @@ namespace ScooterRental
             }
         }
 
-        /*public decimal GetIncome(int? year)
+        public RentedScooter UpdateRental(Scooter scooter, DateTime endTime)
         {
-            decimal profit = 0.0m;
+            var rental = _history.FirstOrDefault(s => s.Id == scooter.Id && !s.EndTime.HasValue);
 
-            if (year == null)
+            if (rental == null)
             {
-                foreach (Scooter s in History.Keys)
-                {
-                    Dictionary<int, decimal> info = History[s];
+                throw new NullScooterException();
 
-                    foreach (int key in info.Keys)
-                    {
-                        profit += info[key];
-                    }
-                }
-            }
-            else
-            {
-                Dictionary<Scooter, Dictionary<int, decimal>> historyByYear = GetHistory(year);
-
-                foreach (Scooter s in historyByYear.Keys)
-                {
-                    Dictionary<int, decimal> info = historyByYear[s];
-
-                    profit += info[(int)year];
-                }
             }
 
-            return profit;
-        }*/
+            rental.EndTime = endTime;
+
+            return rental;
+        }
+
+        public List<RentedScooter> GetIncompleteRentals(int? year)
+        {
+            var rentals = _history.Where(r => !r.EndTime.HasValue).ToList();
+
+            if (year.HasValue)
+            {
+                rentals = rentals.Where(r => r.StarTime.Year == year).ToList();
+            }
+
+            return rentals;
+        }
 
         public Dictionary<Scooter, Dictionary<int, decimal>> GetHistory(int? year)
         {
@@ -118,18 +99,6 @@ namespace ScooterRental
             }
 
             return historyByYear;
-        }
-
-        public List<RentedScooter> GetIncompleteRentals(int? year)
-        {
-            var rentals = _history.Where(r => !r.EndTime.HasValue).ToList();
-
-            if (year.HasValue)
-            {
-                rentals = rentals.Where(r => r.StarTime.Year == year).ToList();
-            }
-
-            return rentals;
         }
     }
 }

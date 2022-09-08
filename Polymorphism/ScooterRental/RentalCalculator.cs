@@ -1,8 +1,9 @@
-﻿using System;
+﻿using ScooterRental.Interfaces;
+using System;
 
 namespace ScooterRental
 {
-    public class RentalCalculator
+    public class RentalCalculator : IRentalCalculator
     {
         public decimal GetFee(RentedScooter rentedScooter)
         {
@@ -38,7 +39,7 @@ namespace ScooterRental
                     }
                 }
 
-                else if (startHours < endHours)
+                else if (startHours <= endHours)
                 {
                     if ((60 * hourDifference + minuteDifference) * pricePerMin < maxDailyCharge)
                     {
@@ -67,7 +68,7 @@ namespace ScooterRental
                     }
                 }
 
-                else if (startHours < endHours)
+                else if (startHours <= endHours)
                 {
                     if ((60 * hourDifference + minuteDifference) * pricePerMin < maxDailyCharge)
                     {

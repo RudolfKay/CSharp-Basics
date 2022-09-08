@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using ScooterRental.Exceptions;
+using ScooterRental.Interfaces;
 using FluentAssertions;
 using System;
 
@@ -9,41 +10,28 @@ namespace ScooterRental.Tests
     [TestClass]
     public class RentalCompanyTests
     {
-        private ScooterService _scooterService;
-        private RentalCompany _rentalCompany;
+        private IScooterService _scooterService;
+        private IRentalCompany _rentalCompany;
         private List<Scooter> _inventory;
         private List<RentedScooter> _rentedInventory;
-        private RentalHistory _rentalHistory;
+        private IRentalHistory _rentalHistory;
         private RentalCalculator _rentalCalculator;
 
         /*//Mocker
         private AutoMocker _mocker;
         private IRentalCompany _company;
         private Mock<IScooterService> _scooterServiceMock;
-        private Scooter _defaultScooter;*/
+        private Scooter _defaultScooter;
 
+        Mocker
         [TestInitialize]
         public void Setup()
         {
-            /*//Mocker
             _defaultScooter = new Scooter("1", 0.2m);
             _mocker = new AutoMocker();
             _scooterServiceMock = _mocker.GetMock<IScooterService>();
-            _company = new RentalCompany("Insurance", _rentedInventory, _scooterServiceMock.Object);*/
-
-            _inventory = new List<Scooter>();
-            _rentedInventory = new List<RentedScooter>();
-            _rentalHistory = new RentalHistory(_rentedInventory);
-            _scooterService = new ScooterService(_inventory);
-            _rentalCalculator = new RentalCalculator();
-
-            for (int i = 0; i < 5; i++)
-            {
-                _scooterService.AddScooter($"{i}", 0.2m);
-            }
-
-            _rentalCompany = new RentalCompany("Cheeki Breeki", _rentalHistory, _scooterService, _rentalCalculator);
-        }
+            _company = new RentalCompany("Insurance", _rentedInventory, _scooterServiceMock.Object);
+        }*/
 
         /*//Mocker
         [TestMethod]
@@ -57,6 +45,23 @@ namespace ScooterRental.Tests
 
             _defaultScooter.IsRented.Should().BeTrue();
         }*/
+
+        [TestInitialize]
+        public void Setup()
+        {
+            _inventory = new List<Scooter>();
+            _rentedInventory = new List<RentedScooter>();
+            _rentalHistory = new RentalHistory(_rentedInventory);
+            _scooterService = new ScooterService(_inventory);
+            _rentalCalculator = new RentalCalculator();
+
+            for (int i = 0; i < 5; i++)
+            {
+                _scooterService.AddScooter($"{i}", 0.2m);
+            }
+
+            _rentalCompany = new RentalCompany("Cheeki Breeki", _rentalHistory, _scooterService, _rentalCalculator);
+        }
 
         [TestMethod]
         public void StartRent_StartRentingScooter_ScooterIsRented()
@@ -177,6 +182,16 @@ namespace ScooterRental.Tests
         }
 
         [TestMethod]
+        public void CalculateIncome_YearIsNotNullIncompleteRentalsFalse_ReturnsIncomeForYear()
+        {
+            _rentalHistory.AddIncome(new Scooter("1", 0.2m), 2020, 92);
+            _rentalHistory.AddIncome(new Scooter("2", 0.2m), 2020, 92);
+
+            decimal yearIncome = _rentalCompany.CalculateIncome(2020, false);
+            yearIncome.Should().Be(184.0m);
+        }
+
+        [TestMethod]
         public void CalculateIncome_YearIsNullIncompleteRentalsTrue_ReturnsTotalIncome()
         {
             _rentalHistory.AddIncome(new Scooter("1", 0.2m), 2022, 80);
@@ -186,16 +201,6 @@ namespace ScooterRental.Tests
             decimal nullYearIncome = _rentalCompany.CalculateIncome(null, true);
             
             nullYearIncome.Should().Be(104.0m);
-        }
-
-        [TestMethod]
-        public void CalculateIncome_YearIsNotNullIncompleteRentalsFalse_ReturnsIncomeForYear()
-        {
-            _rentalHistory.AddIncome(new Scooter("1", 0.2m), 2020, 92);
-            _rentalHistory.AddIncome(new Scooter("2", 0.2m), 2020, 92);
-
-            decimal yearIncome = _rentalCompany.CalculateIncome(2020, false);
-            yearIncome.Should().Be(184.0m);
         }
 
         [TestMethod]

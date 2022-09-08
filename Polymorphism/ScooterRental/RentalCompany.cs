@@ -9,10 +9,10 @@ namespace ScooterRental
     {
         public string Name { get; }
         private readonly IScooterService _scooterService;
-        private readonly RentalHistory _rentalHistory;
+        private readonly IRentalHistory _rentalHistory;
         private readonly RentalCalculator _rentalCalculator;
 
-        public RentalCompany(string companyName, RentalHistory rentalHistory, IScooterService scooterService, RentalCalculator rentalCalculator)
+        public RentalCompany(string companyName, IRentalHistory rentalHistory, IScooterService scooterService, RentalCalculator rentalCalculator)
         {
             Name = companyName;
             _scooterService = scooterService;
@@ -110,69 +110,5 @@ namespace ScooterRental
                 return profit;
             }
         }
-
-        /*public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)
-        {
-            RentalHistory tempHistory = new(_scooterService);
-            List<RentedScooter> tempRentedScooters = new(_rentedScooters);
-            Dictionary<Scooter, Dictionary<int, decimal>> scooterHistory = tempHistory.GetHistory(year ?? null);
-
-            if (tempRentedScooters.Count < 1)
-            {
-                throw new NoScootersFoundException();
-            }
-
-            if (includeNotCompletedRentals)
-            {
-                foreach (RentedScooter rentedScooter in tempRentedScooters.Where(x => !x.EndTime.HasValue))
-                {
-                    rentedScooter.EndTime = DateTime.UtcNow;
-                    DateTime endTime = (DateTime)rentedScooter.EndTime;
-                    int tempYear = endTime.Year;
-
-                    string rentedId = rentedScooter.Id;
-                    decimal currentFee = GetFee(rentedScooter);
-
-                    foreach (Scooter s in scooterHistory.Keys)
-                    {
-                        string thisId = s.Id;
-
-                        if (thisId.Equals(rentedId))
-                        {
-                            tempHistory.AddIncome(s, tempYear, currentFee);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (RentedScooter rentedScooter in tempRentedScooters.Where(x => x.EndTime.HasValue))
-                {
-                    DateTime endTime = (DateTime)rentedScooter.EndTime;
-                    int tempYear = endTime.Year;
-
-                    string rentedId = rentedScooter.Id;
-                    decimal currentFee = GetFee(rentedScooter);
-
-
-                    foreach (Scooter s in scooterHistory.Keys)
-                    {
-                        string thisId = s.Id;
-
-                        if (thisId.Equals(rentedId))
-                        {
-                            tempHistory.AddIncome(s, tempYear, currentFee);
-                        }
-                    }
-                }
-            }
-
-            if (year == null)
-            {
-                return tempHistory.GetIncome(null);
-            }
-
-            return tempHistory.GetIncome(year);
-        }*/
     }
 }

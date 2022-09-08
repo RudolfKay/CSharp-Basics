@@ -8,7 +8,7 @@ namespace ScooterRental.Interfaces
         
         void RemoveScooter(string id);
         
-        IList<Scooter> GetScooters(); //Returns a list of available scooters. Not including rented ones.
+        IList<Scooter> GetScooters();
         
         Scooter GetScooterById(string scooterId);
     }
