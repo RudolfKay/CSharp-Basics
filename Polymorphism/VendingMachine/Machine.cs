@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using VendingMachine.Interfaces;
 
 namespace VendingMachine
 {
     class Machine : IVendingMachine
     {
         public string Manufacturer { get; }
-        public readonly bool _hasProducts;
         public Money Amount { get; set; }
         public Product[] Products { get; set; }
 
@@ -28,6 +28,8 @@ namespace VendingMachine
             {
                 Console.WriteLine("*clink* Accepted.");
                 Amount = new Money(Amount.GetTotalCents() + amount.GetTotalCents());
+
+                return Amount;
             }
             else
                 Console.WriteLine("*beep* Coin wasn't accepted.");
