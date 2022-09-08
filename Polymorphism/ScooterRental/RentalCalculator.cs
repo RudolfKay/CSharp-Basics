@@ -6,7 +6,6 @@ namespace ScooterRental
     {
         public decimal GetFee(RentedScooter rentedScooter)
         {
-            //Scooter scooter = _scooterService.GetScooterById(rentedScooter.Id);
             DateTime startRentTime = rentedScooter.StarTime;
             DateTime endRentTime = (DateTime)rentedScooter.EndTime;
             TimeSpan timeSpanRented = endRentTime - startRentTime;
@@ -14,8 +13,7 @@ namespace ScooterRental
             decimal pricePerMin = rentedScooter.PricePerMinute;
             decimal amount = 0.0m;
             decimal maxDailyCharge = 20.0m;
-
-            //int year = endRentTime.Year;
+            
             int fullDaysRented = (int)timeSpanRented.TotalDays;
             int hourDifference = (int)timeSpanRented.Hours;
             int minuteDifference = (int)timeSpanRented.Minutes;
@@ -82,8 +80,7 @@ namespace ScooterRental
                     }
                 }
             }
-
-            //_rentalHistory.AddIncome(scooter, year, amount);
+            
             return amount;
         }
     }

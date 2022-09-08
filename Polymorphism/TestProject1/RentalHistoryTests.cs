@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using ScooterRental.Exceptions;
 using FluentAssertions;
 using System;
-using ScooterRental.Interfaces;
 
 namespace ScooterRental.Tests
 {

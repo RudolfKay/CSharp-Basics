@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ScooterRental.Exceptions;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using ScooterRental.Exceptions;
+using FluentAssertions;
+using System;
 
 namespace ScooterRental.Tests
 {
@@ -45,7 +45,8 @@ namespace ScooterRental.Tests
             _rentalCompany = new RentalCompany("Cheeki Breeki", _rentalHistory, _scooterService, _rentalCalculator);
         }
 
-        /*[TestMethod]
+        /*//Mocker
+        [TestMethod]
         public void StartRentTest()
         {
             _scooterServiceMock
@@ -167,49 +168,24 @@ namespace ScooterRental.Tests
         [TestMethod]
         public void CalculateIncome_YearIsNullIncompleteRentalsFalse_ReturnsTotalIncome()
         {
-            _rentalCompany.StartRent("1");
-            _rentalCompany.StartRent("2");
-            _rentalCompany.StartRent("3");
-            RentedScooter rentedScoot1 = _rentedInventory[0];
-            RentedScooter rentedScoot2 = _rentedInventory[1];
-            RentedScooter rentedScoot3 = _rentedInventory[2];
-            rentedScoot1.StarTime = new DateTime(2020, 09, 03, 20, 00, 00);
-            rentedScoot1.EndTime = new DateTime(2020, 09, 08, 01, 00, 00);
-            rentedScoot2.StarTime = new DateTime(2022, 09, 03, 20, 00, 00);
-            rentedScoot2.EndTime = new DateTime(2022, 09, 08, 01, 00, 00);
-            rentedScoot3.StarTime = new DateTime(2020, 09, 03, 20, 00, 00);
-
-            decimal fee1 = _rentalCalculator.GetFee(rentedScoot1);
-            decimal fee2 = _rentalCalculator.GetFee(rentedScoot2);
+            _rentalHistory.AddIncome(new Scooter("1", 0.2m), 2022, 80);
+            _rentalHistory.AddIncome(new Scooter("2", 0.2m), 2020, 20);
+            _rentedInventory.Add(new RentedScooter("3", 0.2m, DateTime.UtcNow.AddMinutes(-20)));
+            
             decimal nullYearIncome = _rentalCompany.CalculateIncome(null, false);
-
-            fee1.Should().Be(92.0m);
-            fee2.Should().Be(92.0m);
-            nullYearIncome.Should().Be(184.0m);
+            nullYearIncome.Should().Be(100.0m);
         }
 
         [TestMethod]
         public void CalculateIncome_YearIsNullIncompleteRentalsTrue_ReturnsTotalIncome()
         {
-            _rentalCompany.StartRent("1");
-            _rentalCompany.StartRent("2");
-            _rentalCompany.StartRent("3");
-            RentedScooter rentedScoot1 = _rentedInventory[0];
-            RentedScooter rentedScoot2 = _rentedInventory[1];
-            RentedScooter rentedScoot3 = _rentedInventory[2];
-            rentedScoot1.StarTime = new DateTime(2020, 09, 03, 20, 00, 00);
-            rentedScoot1.EndTime = new DateTime(2020, 09, 08, 01, 00, 00);
-            rentedScoot2.StarTime = new DateTime(2022, 09, 03, 20, 00, 00);
-            rentedScoot2.EndTime = new DateTime(2022, 09, 08, 01, 00, 00);
-            rentedScoot3.StarTime = new DateTime(2020, 09, 03, 20, 00, 00);
-
-            decimal fee1 = _rentalCalculator.GetFee(rentedScoot1);
-            decimal fee2 = _rentalCalculator.GetFee(rentedScoot2);
+            _rentalHistory.AddIncome(new Scooter("1", 0.2m), 2022, 80);
+            _rentalHistory.AddIncome(new Scooter("2", 0.2m), 2020, 20);
+            _rentedInventory.Add(new RentedScooter("3", 0.2m, DateTime.UtcNow.AddMinutes(-20)));
+            
             decimal nullYearIncome = _rentalCompany.CalculateIncome(null, true);
-
-            fee1.Should().Be(92.0m);
-            fee2.Should().Be(92.0m);
-            nullYearIncome.Should().BeGreaterThan(200.0m);
+            
+            nullYearIncome.Should().Be(104.0m);
         }
 
         [TestMethod]
@@ -232,7 +208,6 @@ namespace ScooterRental.Tests
             decimal yearIncome = _rentalCompany.CalculateIncome(2022, true);
             
             yearIncome.Should().Be(104.0m);
-            //yearIncome.Should().BeLessThan(184.0m);
         }
     }
 }
