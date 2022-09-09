@@ -84,18 +84,18 @@ namespace VendingMachine
 
         public static void RestockMachine()
         {
-            _vendingMachine = new("Nippon", 20);
+            _vendingMachine = new Machine("Nippon", 20);
 
-            Product p0 = new("Fanta",new(90),1);
-            Product p1 = new("Sprite", new(90), 5);
-            Product p2 = new("Coca-Cola", new(100), 5);
-            Product p3 = new("Pepsi", new(100), 5);
-            Product p4 = new("Orbit", new(70), 5);
-            Product p5 = new("Dirol", new(60), 5);
-            Product p6 = new("Lays", new(150), 5);
-            Product p7 = new("Estrella", new(170), 5);
-            Product p8 = new("Cheetos", new(140), 5);
-            Product p9 = new("Snickers", new(120), 5);
+            Product p0 = new("Fanta",new Money(90),1);
+            Product p1 = new("Sprite", new Money(90), 5);
+            Product p2 = new("Coca-Cola", new Money(100), 5);
+            Product p3 = new("Pepsi", new Money(100), 5);
+            Product p4 = new("Orbit", new Money(70), 5);
+            Product p5 = new("Dirol", new Money(60), 5);
+            Product p6 = new("Lays", new Money(150), 5);
+            Product p7 = new("Estrella", new Money(170), 5);
+            Product p8 = new("Cheetos", new Money(140), 5);
+            Product p9 = new("Snickers", new Money(120), 5);
 
             _vendingMachine.Products = new[] { p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 };
         }

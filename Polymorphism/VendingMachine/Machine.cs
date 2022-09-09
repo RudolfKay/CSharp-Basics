@@ -1,28 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using VendingMachine.Exceptions;
 using VendingMachine.Interfaces;
 
 namespace VendingMachine
 {
-    class Machine : IVendingMachine
+    public class Machine : IVendingMachine
     {
         public string Manufacturer { get; }
         public Money Amount { get; set; }
         public Product[] Products { get; set; }
 
+        public bool HasProducts => Products != null;
+
         public Machine(string manufacturer, int productSpace)
         {
+            if (string.IsNullOrEmpty(manufacturer))
+            {
+                throw new InvalidManufacturerException();
+            }
+
+            if (productSpace <= 0)
+            {
+                throw new InvalidVendingSlotCountException();
+            }
+
             Amount = new Money(0,0);
             Manufacturer = manufacturer;
             Products = new Product[productSpace];
         }
 
-        public bool HasProducts => Products != null;
-
         public Money InsertCoin(Money amount)
         {
-            int[] acceptedCurrency = new int[] { 10, 20, 50, 100, 200 };
+            if (amount.GetTotalCents() <= 0)
+            {
+                throw new InvalidMoneyException();
+            }
+
+            int[] acceptedCurrency = { 10, 20, 50, 100, 200 };
 
             if (acceptedCurrency.Contains(amount.GetTotalCents()))
             {
@@ -31,8 +47,8 @@ namespace VendingMachine
 
                 return Amount;
             }
-            else
-                Console.WriteLine("*beep* Coin wasn't accepted.");
+            
+            Console.WriteLine("*beep* Coin wasn't accepted.");
 
             return Amount;
         }
@@ -47,6 +63,21 @@ namespace VendingMachine
 
         public bool AddProduct(string name, Money price, int count)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InvalidNameException();
+            }
+
+            if (price.GetTotalCents() <= 0)
+            {
+                throw new InvalidMoneyException();
+            }
+
+            if (count <= 0)
+            {
+                throw new InvalidProductCountException();
+            }
+
             Product newProduct = new Product(name, price, count);
 
             if (Products.Length == 0)
@@ -64,7 +95,7 @@ namespace VendingMachine
                     {
                         return UpdateProduct(i, name, price, count);
                     }
-                    else if (Products[i].Equals(null))
+                    if (Products[i].Equals(null))
                     {
                         Products[i] = newProduct;
 
@@ -78,6 +109,26 @@ namespace VendingMachine
 
         public bool UpdateProduct(int productNumber, string name, Money price, int amount)
         {
+            if (productNumber < 0)
+            {
+                throw new InvalidSelectionException();
+            }
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InvalidNameException();
+            }
+
+            if (price.GetTotalCents() <= 0)
+            {
+                throw new InvalidMoneyException();
+            }
+
+            if (amount < 0)
+            {
+                throw new InvalidProductCountException();
+            }
+
             if (!Products[productNumber].Equals(null))
             {
                 Products[productNumber].Name = name;
@@ -92,8 +143,13 @@ namespace VendingMachine
 
         public void DisplayItems()
         {
-            Console.Clear();
-            Console.WriteLine($"Manufactured by {Manufacturer}.");
+            //Console.Clear();
+            Console.WriteLine($"\nManufactured by {Manufacturer}.");
+
+            if (Products.Length <= 0)
+            {
+                throw new MachineIsEmptyException();
+            }
 
             foreach (Product product in Products)
             {
