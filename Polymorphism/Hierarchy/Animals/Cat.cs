@@ -1,6 +1,7 @@
 ﻿using System;
+using Hierarchy.Diet;
 
-namespace Hierarchy
+namespace Hierarchy.Animals
 {
     public class Cat : Feline
     {

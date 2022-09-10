@@ -1,30 +1,31 @@
 ﻿using System;
+using Hierarchy.Diet;
 
-namespace Hierarchy
+namespace Hierarchy.Animals
 {
-    public class Lion : Feline
+    public class Mouse : Mammal
     {
-        public Lion() : base()
+        public Mouse() : base()
         {
         }
 
-        public Lion(string name, string type, double weight, string region) : base(name, type, weight, region)
+        public Mouse(string name, string type, double weight, string region) : base(name, type, weight, region)
         {
         }
 
         public override void MakeSound()
         {
-            Console.WriteLine("..rrROAAARrr...");
+            Console.WriteLine("..squeek..squeeeeek..."); ;
         }
 
         public override void EatFood(Food food)
         {
-            var foodType = new Meat().GetType();
+            var foodType = new Vegetable().GetType();
 
             if (food.GetType() == foodType)
             {
                 FoodEaten += food.GetQuantity();
-                Console.WriteLine("Roars and eats the meat chunk by chunk!");
+                Console.WriteLine("Happily squeaks and nibbles on food!");
             }
             else
             {

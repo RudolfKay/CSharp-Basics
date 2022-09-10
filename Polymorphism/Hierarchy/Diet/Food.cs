@@ -1,4 +1,4 @@
-﻿namespace Hierarchy
+﻿namespace Hierarchy.Diet
 {
     public abstract class Food
     {
@@ -10,7 +10,7 @@
         }
 
         protected Food(int quantity)
-        { 
+        {
             Quantity = quantity;
         }
 

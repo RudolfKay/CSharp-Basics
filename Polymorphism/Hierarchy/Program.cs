@@ -1,5 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Hierarchy.Animals;
+using Hierarchy.Diet;
+using System;
 
 namespace Hierarchy
 {
@@ -7,13 +9,14 @@ namespace Hierarchy
     {
         private static List<Animal> _animals;
 
-        static void Main(string[] args)
+        static void Main()
         {
             _animals = new List<Animal>();
 
             while (true)
             {
-                Console.WriteLine("Enter details of an animal.\nFormat: Type Name Weight Region (and Breed if cat).\n");
+                Console.WriteLine("Enter details of an animal. Type END to quit.\n" +
+                                  "Format: Type Name Weight Region (and Breed if cat).\n");
                 string animalInput = Console.ReadLine();
 
                 if (animalInput.ToLower().Equals("end"))

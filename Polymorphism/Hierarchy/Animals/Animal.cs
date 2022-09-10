@@ -1,4 +1,6 @@
-﻿namespace Hierarchy
+﻿using Hierarchy.Diet;
+
+namespace Hierarchy.Animals
 {
     public abstract class Animal
     {

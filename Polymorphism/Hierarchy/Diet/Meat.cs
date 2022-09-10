@@ -1,4 +1,4 @@
-﻿namespace Hierarchy
+﻿namespace Hierarchy.Diet
 {
     public class Meat : Food
     {

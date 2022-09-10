@@ -1,4 +1,4 @@
-﻿namespace Hierarchy
+﻿namespace Hierarchy.Animals
 {
     public abstract class Feline : Mammal
     {
