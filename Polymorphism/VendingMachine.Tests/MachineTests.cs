@@ -2,7 +2,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VendingMachine.Exceptions;
 using FluentAssertions;
 using System;
-using VendingMachine.Interfaces;
 
 namespace VendingMachine.Tests
 {
@@ -67,16 +66,12 @@ namespace VendingMachine.Tests
         }
 
         [TestMethod]
-        public void InsertCoin_InsertImpossibleCoin_ThrowsInvalidMoneyException()
+        public void InsertCoin_InsertNothing_ThrowsInvalidMoneyException()
         {
-            Money money1 = new Money(-10);
-            Money money2 = new Money(0);
+            Money money1 = new Money(0);
             Action act1 = () => _vendingMachine.InsertCoin(money1);
-            Action act2 = () => _vendingMachine.InsertCoin(money2);
 
             act1.Should().Throw<InvalidMoneyException>()
-                .WithMessage($"Price is invalid");
-            act2.Should().Throw<InvalidMoneyException>()
                 .WithMessage($"Price is invalid");
         }
 
@@ -125,18 +120,23 @@ namespace VendingMachine.Tests
         }
 
         [TestMethod]
-        public void AddProduct_AddProductWithInvalidPrice_ThrowsInvalidMoneyException()
+        public void AddProduct_AddProductWithPriceZero_ThrowsInvalidMoneyException()
+        {
+            Action act1 = () =>
+                _vendingMachine.AddProduct("Pringles", new Money(0), 5);
+            
+            act1.Should().Throw<InvalidMoneyException>()
+                .WithMessage($"Price is invalid");
+        }
+
+        [TestMethod]
+        public void AddProduct_AddProductWithNegativePrice_ThrowsInvalidAmountException()
         {
             Action act1 = () =>
                 _vendingMachine.AddProduct("Dr. Pepper", new Money(-50), 5);
-
-            Action act2 = () =>
-                _vendingMachine.AddProduct("Pringles", new Money(0), 5);
-
-            act1.Should().Throw<InvalidMoneyException>()
-                .WithMessage($"Price is invalid");
-            act2.Should().Throw<InvalidMoneyException>()
-                .WithMessage($"Price is invalid");
+            
+            act1.Should().Throw<InvalidAmountException>()
+                .WithMessage($"Amount is below zero");
         }
 
         [TestMethod]
