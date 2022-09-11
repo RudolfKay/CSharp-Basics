@@ -65,34 +65,44 @@ namespace Hierarchy
             if (animalType.Equals("zebra"))
             {
                 Animal zebra = new Zebra(animalName,animalType,animalWeight,animalRegion);
-
                 thisAnimal = zebra;
-                zebra.MakeSound();
+
+                Console.WriteLine(zebra.MakeSound());
                 Feed(zebra, foodType, foodCount);
             }
             else if (animalType.Equals("mouse"))
             {
                 Animal mouse = new Mouse(animalName, animalType, animalWeight, animalRegion);
-
                 thisAnimal = mouse;
-                mouse.MakeSound();
+
+                Console.WriteLine(mouse.MakeSound());
                 Feed(mouse, foodType, foodCount);
             }
             else if (animalType.Equals("lion"))
             {
                 Animal lion = new Lion(animalName, animalType, animalWeight, animalRegion);
-
                 thisAnimal = lion;
-                lion.MakeSound();
+
+                Console.WriteLine(lion.MakeSound());
                 Feed(lion, foodType, foodCount);
             }
             else if (animalType.Equals("cat"))
             {
-                string catBreed = animal[4].ToLower().Trim();
-                Animal cat = new Cat(animalName, animalType, animalWeight, animalRegion, catBreed);
+                string catBreed = "";
 
+                if (animal.Length < 5)
+                {
+                    catBreed = "Mixed";
+                }
+                else
+                {
+                    catBreed = animal[4].ToLower().Trim();
+                }
+
+                Animal cat = new Cat(animalName, animalType, animalWeight, animalRegion, catBreed);
                 thisAnimal = cat;
-                cat.MakeSound();
+
+                Console.WriteLine(cat.MakeSound());
                 Feed(cat, foodType, foodCount);
             }
 

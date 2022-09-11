@@ -5,27 +5,23 @@ namespace Hierarchy.Animals
 {
     public class Lion : Feline
     {
-        public Lion() : base()
-        {
-        }
-
         public Lion(string name, string type, double weight, string region) : base(name, type, weight, region)
         {
         }
 
-        public override void MakeSound()
+        public override String MakeSound()
         {
-            Console.WriteLine("..rrROAAARrr...");
+            return "...rrROAAARrr...";
         }
 
         public override void EatFood(Food food)
         {
-            var foodType = new Meat().GetType();
+            var foodType = new Meat(1).GetType();
 
             if (food.GetType() == foodType)
             {
                 FoodEaten += food.GetQuantity();
-                Console.WriteLine("Roars and eats the meat chunk by chunk!");
+                Console.WriteLine("Eats the meat chunk by chunk!");
             }
             else
             {

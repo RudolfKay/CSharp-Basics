@@ -1,23 +1,19 @@
-﻿namespace Hierarchy.Diet
+﻿using Hierarchy.Exceptions;
+
+namespace Hierarchy.Diet
 {
     public abstract class Food
     {
-        private int _quantity;
-
-        protected Food()
-        {
-            Quantity = 0;
-        }
+        protected int Quantity { get; set; }
 
         protected Food(int quantity)
         {
-            Quantity = quantity;
-        }
+            if (quantity < 0)
+            {
+                throw new InvalidFoodQuantityException();
+            }
 
-        protected int Quantity
-        {
-            get => _quantity;
-            set => _quantity = value;
+            Quantity = quantity;
         }
 
         public abstract void SetQuantity(int quantity);

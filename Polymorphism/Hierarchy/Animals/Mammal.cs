@@ -1,19 +1,22 @@
-﻿namespace Hierarchy.Animals
+﻿using Hierarchy.Exceptions;
+
+namespace Hierarchy.Animals
 {
     public abstract class Mammal : Animal
     {
         private string _livingRegion;
 
-        protected Mammal() : base()
-        {
-        }
-
         protected Mammal(string name, string type, double weight, string region) : base(name, type, weight)
         {
+            if (string.IsNullOrEmpty(region))
+            {
+                throw new InvalidRegionException();
+            }
+
             LivingRegion = region;
         }
 
-        protected string LivingRegion
+        public string LivingRegion
         {
             get => _livingRegion;
             set => _livingRegion = value;

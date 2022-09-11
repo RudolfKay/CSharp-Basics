@@ -1,5 +1,6 @@
-﻿using System;
+﻿using Hierarchy.Exceptions;
 using Hierarchy.Diet;
+using System;
 
 namespace Hierarchy.Animals
 {
@@ -7,25 +8,25 @@ namespace Hierarchy.Animals
     {
         private string _catBreed;
 
-        public Cat() : base()
-        {
-            CatBreed = "Unknown";
-        }
-
         public Cat(string name, string type, double weight, string region, string catBreed) : base(name, type, weight, region)
         {
+            if (string.IsNullOrEmpty(catBreed))
+            {
+                throw new InvalidBreedException();
+            }
+
             CatBreed = catBreed;
         }
 
-        private string CatBreed
+        public string CatBreed
         {
             get => _catBreed;
             set => _catBreed = value;
         }
 
-        public override void MakeSound()
+        public override string MakeSound()
         {
-            Console.WriteLine("Meow...Mrr..");
+            return "Meow...Mrr..";
         }
 
         public override void EatFood(Food food)
