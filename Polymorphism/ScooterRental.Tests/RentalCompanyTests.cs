@@ -17,35 +17,6 @@ namespace ScooterRental.Tests
         private IRentalHistory _rentalHistory;
         private RentalCalculator _rentalCalculator;
 
-        /*//Mocker
-        private AutoMocker _mocker;
-        private IRentalCompany _company;
-        private Mock<IScooterService> _scooterServiceMock;
-        private Scooter _defaultScooter;
-
-        Mocker
-        [TestInitialize]
-        public void Setup()
-        {
-            _defaultScooter = new Scooter("1", 0.2m);
-            _mocker = new AutoMocker();
-            _scooterServiceMock = _mocker.GetMock<IScooterService>();
-            _company = new RentalCompany("Insurance", _rentedInventory, _scooterServiceMock.Object);
-        }*/
-
-        /*//Mocker
-        [TestMethod]
-        public void StartRentTest()
-        {
-            _scooterServiceMock
-                .Setup(s => s.GetScooterById("1"))
-                .Returns(_defaultScooter);
-
-            _company.StartRent("1");
-
-            _defaultScooter.IsRented.Should().BeTrue();
-        }*/
-
         [TestInitialize]
         public void Setup()
         {

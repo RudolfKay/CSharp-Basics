@@ -143,7 +143,6 @@ namespace VendingMachine
 
         public void DisplayItems()
         {
-            //Console.Clear();
             Console.WriteLine($"\nManufactured by {Manufacturer}.");
 
             if (Products.Length <= 0)

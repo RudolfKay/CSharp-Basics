@@ -10,7 +10,6 @@ namespace ScooterRental
     {
         private readonly List<RentedScooter> _history;
         public Dictionary<Scooter, Dictionary<int, decimal>> History { get; }
-                    //<Key: Scooter, Value: <Key: year, Value: profit>>
 
         public RentalHistory(List<RentedScooter> history)
         {

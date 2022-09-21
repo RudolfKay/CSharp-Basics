@@ -7,7 +7,6 @@ namespace ScooterRental.Interfaces
     public interface IRentalHistory
     {
         Dictionary<Scooter, Dictionary<int, decimal>> History { get; }
-                //<Key: Scooter, Value: <Key: year, Value: profit>>
         
         void AddRent(Scooter scooter, DateTime starTime);
 
