@@ -64,51 +64,7 @@ namespace ScooterRental
 
         public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)
         {
-            if (year.HasValue)
-            {
-                if (includeNotCompletedRentals && year.Value != DateTime.Today.Year)
-                {
-                    throw new InvalidOperationException();
-                }
-
-                var items = _rentalHistory.GetHistory(year);
-                var profit = items.Select(i => i.Value[year.Value]).Sum();
-
-                if (includeNotCompletedRentals)
-                {
-                    var incompleteRentals = _rentalHistory.GetIncompleteRentals(year);
-
-                    foreach (var rentedScooter in incompleteRentals)
-                    {
-                        rentedScooter.EndTime = DateTime.UtcNow;
-                        profit += _rentalCalculator.GetFee(rentedScooter);
-                    }
-                }
-
-                return profit;
-            }
-
-            if (!includeNotCompletedRentals)
-            {
-                var items = _rentalHistory.GetHistory(null);
-                var profit = items.Select(i => i.Value.Values.Sum()).Sum();
-
-                return profit;
-            }
-            else
-            {
-                var items = _rentalHistory.GetHistory(null);
-                var profit = items.Select(i => i.Value.Values.Sum()).Sum();
-                var incompleteRentals = _rentalHistory.GetIncompleteRentals(null);
-
-                foreach (var rentedScooter in incompleteRentals)
-                {
-                    rentedScooter.EndTime = DateTime.UtcNow;
-                    profit += _rentalCalculator.GetFee(rentedScooter);
-                }
-
-                return profit;
-            }
+            return _rentalCalculator.GetIncome(year, includeNotCompletedRentals, _rentalHistory);
         }
     }
 }

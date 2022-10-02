@@ -1,4 +1,5 @@
 ﻿using ScooterRental.Interfaces;
+using System.Linq;
 using System;
 
 namespace ScooterRental
@@ -83,6 +84,55 @@ namespace ScooterRental
             }
             
             return amount;
+        }
+
+        public decimal GetIncome(int? year, bool includeNotCompletedRentals, IRentalHistory rentalHistory)
+        {
+            if (year.HasValue)
+            {
+                if (includeNotCompletedRentals && year.Value != DateTime.Today.Year)
+                {
+                    throw new InvalidOperationException();
+                }
+
+                var items = rentalHistory.GetHistory(year);
+                var profit = items.Select(i => i.Value[year.Value]).Sum();
+
+                if (includeNotCompletedRentals)
+                {
+                    var incompleteRentals = rentalHistory.GetIncompleteRentals(year);
+
+                    foreach (var rentedScooter in incompleteRentals)
+                    {
+                        rentedScooter.EndTime = DateTime.UtcNow;
+                        profit += GetFee(rentedScooter);
+                    }
+                }
+
+                return profit;
+            }
+
+            if (!includeNotCompletedRentals)
+            {
+                var items = rentalHistory.GetHistory(null);
+                var profit = items.Select(i => i.Value.Values.Sum()).Sum();
+
+                return profit;
+            }
+            else
+            {
+                var items = rentalHistory.GetHistory(null);
+                var profit = items.Select(i => i.Value.Values.Sum()).Sum();
+                var incompleteRentals = rentalHistory.GetIncompleteRentals(null);
+
+                foreach (var rentedScooter in incompleteRentals)
+                {
+                    rentedScooter.EndTime = DateTime.UtcNow;
+                    profit += GetFee(rentedScooter);
+                }
+
+                return profit;
+            }
         }
     }
 }
