@@ -92,7 +92,6 @@ namespace ScooterRental
 
                 if (info.ContainsKey(year.Value))
                 {
-                    //var income = info[year.Value];
                     historyByYear.Add(s, info);
                 }
             }
