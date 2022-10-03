@@ -1,16 +1,31 @@
-﻿namespace VendingMachine
+﻿using System.Drawing;
+using VendingMachine.Exceptions;
+
+namespace VendingMachine
 {
     public struct Product
     {
-        ///<summary>Gets or sets the available amount of product.</summary>
         public int Available { get; set; }
-        ///<summary>Gets or sets the product price.</summary>
         public Money Price { get; set; }
-        ///<summary>Gets or sets the product name.</summary>
         public string Name { get; set; }
 
         public Product(string name, Money price, int numAvailable)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InvalidNameException();
+            }
+
+            if (price.GetTotalCents() <= 0)
+            {
+                throw new InvalidMoneyException();
+            }
+
+            if (numAvailable < 0)
+            {
+                throw new InvalidProductCountException();
+            }
+
             Name = name;
             Price = price;
             Available = numAvailable;
@@ -18,7 +33,7 @@
 
         public override string ToString()
         {
-            return $"{Name}: {Price.ToString()}, {Available}";
+            return $"{Name}: {Price.ToString()}, Amount: {Available}";
         }
     }
 }

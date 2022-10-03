@@ -1,4 +1,7 @@
-﻿namespace Hierarchy
+﻿using Hierarchy.Exceptions;
+using Hierarchy.Diet;
+
+namespace Hierarchy.Animals
 {
     public abstract class Animal
     {
@@ -7,41 +10,48 @@
         private double _animalWeight;
         private int _foodEaten;
 
-        protected Animal()
-        {
-            AnimalName = "Unknown";
-            AnimalType = "Unknown";
-            AnimalWeight = 0.0;
-            FoodEaten = 0;
-        }
-
         protected Animal(string name, string type, double weight)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InvalidNameException();
+            }
+
+            if (string.IsNullOrEmpty(type))
+            {
+                throw new InvalidTypeException();
+            }
+
+            if (weight <= 0)
+            {
+                throw new InvalidWeightException();
+            }
+
             AnimalName = name;
             AnimalType = type;
             AnimalWeight = weight;
             FoodEaten = 0;
         }
 
-        protected string AnimalName
+        public string AnimalName
         {
             get => _animalName;
             set => _animalName = value;
         }
 
-        protected string AnimalType
+        public string AnimalType
         {
             get => _animalType;
             set => _animalType = value;
         }
 
-        protected double AnimalWeight
+        public double AnimalWeight
         {
             get => _animalWeight;
             set => _animalWeight = value;
         }
 
-        protected int FoodEaten
+        public int FoodEaten
         {
             get => _foodEaten;
             set => _foodEaten = value;
@@ -49,10 +59,10 @@
 
         public override string ToString()
         {
-            return $"{AnimalType} ";
+            return $"{AnimalType}";
         }
 
-        public abstract void MakeSound();
+        public abstract string MakeSound();
 
         public abstract void EatFood(Food food);
     }

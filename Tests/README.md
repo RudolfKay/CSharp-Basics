@@ -16,7 +16,7 @@ When creating tests, each test method should be in the form UsedMethod_WhatIsGiv
         {
             // Arrange
             int a = 1;
-            int b = 1;
+            int b = 1; 
 
             // Act
             var result = _test.IsNumber15(a, b);

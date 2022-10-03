@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
+using VendingMachine.Exceptions;
 
 namespace VendingMachine
 {
@@ -15,6 +11,11 @@ namespace VendingMachine
 
         public Money(int euros, int cents)
         {
+            if (euros < 0 || cents < 0)
+            {
+                throw new InvalidAmountException();
+            }
+
             FranceCultureInfo = CultureInfo.GetCultureInfo("fr-FR");
             Euros = euros;
             Cents = cents;
@@ -22,6 +23,11 @@ namespace VendingMachine
 
         public Money(int cents)
         {
+            if (cents < 0)
+            {
+                throw new InvalidAmountException();
+            }
+
             FranceCultureInfo = CultureInfo.GetCultureInfo("fr-FR");
             Euros = (int)cents / 100;
             Cents = cents % 100;

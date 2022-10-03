@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VendingMachine
 {
@@ -10,7 +6,7 @@ namespace VendingMachine
     {
         private static Machine _vendingMachine;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
             RestockMachine();
 
@@ -34,18 +30,31 @@ namespace VendingMachine
 
                 Console.WriteLine($"\nYour Selection:\n{Array.IndexOf(stock,selection)} - {selection.ToString()}");
                 int totalPrice = selection.Price.GetTotalCents();
+                int amountLeft = selection.Available;
                 int cost = 0;
 
-                while (cost < totalPrice)
+                while (cost < totalPrice && amountLeft > 0)
                 {
-                    Console.WriteLine($"Please insert coins (Accepted: 0,10 0,20 0,50 1,00 2,00)");
+                    Money startingMoney = _vendingMachine.Amount;
+
+                    Console.WriteLine($"Please insert coins (Accepted: 10 20 50 100 200)");
                     Console.WriteLine($"Remaining amount: {totalPrice - cost}");
                     int cents = int.Parse(Console.ReadLine());
 
-                    cost += cents;
+                    Money currentMoney = _vendingMachine.InsertCoin(new(cents));
+
+                    if (currentMoney.GetTotalCents() > startingMoney.GetTotalCents())
+                    {
+                        cost += cents;
+                    }
 
                     Console.ReadKey();
                     Console.Clear();
+                }
+
+                if (amountLeft == 0)
+                {
+                    Console.WriteLine($"{selection.Name} is out of stock...");
                 }
 
                 if (cost > totalPrice)
@@ -53,11 +62,15 @@ namespace VendingMachine
                     int difference = cost - totalPrice;
                     Console.WriteLine($"Dispensing change...*dink,dink,chink,dink*");
                     Console.WriteLine($"You find {difference} cents in the change slot.\n");
-                    _vendingMachine.Amount = new Money(_vendingMachine.Amount.GetTotalCents() - difference);
-                }
 
-                Console.WriteLine($"Dispensing item...*brrrrrrrt*...*clink*");
-                _vendingMachine.UpdateProduct(int.Parse(userInput), selection.Name, selection.Price, selection.Available - 1);
+                    _vendingMachine.Amount = new(_vendingMachine.Amount.GetTotalCents() - difference);
+                    cost = totalPrice;
+                }
+                if (cost == totalPrice)
+                {
+                    Console.WriteLine($"Dispensing item...*brrrrrrrt*...*clink*");
+                    _vendingMachine.UpdateProduct(int.Parse(userInput), selection.Name, selection.Price, amountLeft - 1);
+                }
 
                 Console.ReadKey();
                 Console.Clear();
@@ -73,16 +86,16 @@ namespace VendingMachine
         {
             _vendingMachine = new Machine("Nippon", 20);
 
-            Product p0 = new Product("Fanta",new Money(90),5);
-            Product p1 = new Product("Sprite", new Money(90), 5);
-            Product p2 = new Product("Coca-Cola", new Money(100), 5);
-            Product p3 = new Product("Pepsi", new Money(100), 5);
-            Product p4 = new Product("Orbit", new Money(70), 5);
-            Product p5 = new Product("Dirol", new Money(60), 5);
-            Product p6 = new Product("Lays", new Money(150), 5);
-            Product p7 = new Product("Estrella", new Money(170), 5);
-            Product p8 = new Product("Cheetos", new Money(140), 5);
-            Product p9 = new Product("Snickers", new Money(120), 5);
+            Product p0 = new("Fanta",new Money(90),1);
+            Product p1 = new("Sprite", new Money(90), 5);
+            Product p2 = new("Coca-Cola", new Money(100), 5);
+            Product p3 = new("Pepsi", new Money(100), 5);
+            Product p4 = new("Orbit", new Money(70), 5);
+            Product p5 = new("Dirol", new Money(60), 5);
+            Product p6 = new("Lays", new Money(150), 5);
+            Product p7 = new("Estrella", new Money(170), 5);
+            Product p8 = new("Cheetos", new Money(140), 5);
+            Product p9 = new("Snickers", new Money(120), 5);
 
             _vendingMachine.Products = new[] { p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 };
         }
